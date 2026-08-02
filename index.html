@@ -89,6 +89,8 @@ p.lead{color:var(--muted);font-size:14.5px;line-height:1.55}
 .hlvl{font-family:'Spline Sans Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--navy2);margin-bottom:4px}
 .hsep{border-top:1px dashed #C9D8EA;margin:10px 0}
 .hintbox{background:#F4F7FB;border:1px solid #C9D8EA;border-left:4px solid var(--navy2);border-radius:8px;padding:12px 14px;font-size:13.5px;line-height:1.6;margin:10px 0;color:#2c3e50}
+.scnlabel{font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.6px;color:#8a6d2f;margin-bottom:8px}
+.opttr{display:block;font-size:12.5px;color:var(--muted);font-style:italic;margin-top:3px}
 .scenario{background:#FBFAF6;border:1px dashed var(--gold);border-radius:8px;padding:14px;font-size:13.5px;line-height:1.55;margin:12px 0;white-space:pre-wrap;color:#4b4436}
 .opts{margin-top:16px;display:flex;flex-direction:column;gap:8px}
 .opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:12px 14px;cursor:pointer;background:#fff;text-align:left;font-size:14.5px;line-height:1.5;width:100%}
@@ -831,6 +833,64 @@ OCT2024.forEach(q=>q.exam="out2024");
 MAY2024.forEach(q=>q.exam="mai2024");
 OCT2025.forEach(q=>q.exam="out2025");
 APR2025.forEach(q=>q.exam="abr2025");
+const CBLE_TR={
+out2025:{
+1:{q:["Qual das opções a seguir constitui um \"uso indevido de licença ou permit\" NÃO permitido, segundo os regulamentos do CBP aplicáveis a customs brokers licenciados?","¿Cuál de las siguientes opciones constituye un \"uso indebido de licencia o permit\" NO permitido según los reglamentos del CBP aplicables a customs brokers licenciados?"],
+A:["Um broker permite que uma pessoa sem licença, que não é seu funcionário, solicite, promova ou realize qualquer customs business usando a licença do broker.","Un broker permite que una persona sin licencia, que no es su empleado, solicite, promueva o realice cualquier customs business usando la licencia del broker."],
+B:["Um broker influencia ou tenta influenciar a conduta de um representante do DHS em assunto pendente, por meio de coação ou falsa acusação.","Un broker influye o intenta influir en la conducta de un representante del DHS en un asunto pendiente, mediante coacción o falsa acusación."],
+C:["Um broker obtém ou tenta obter informações de registros do Governo aos quais não recebeu acesso da autoridade competente.","Un broker obtiene o intenta obtener información de registros del Gobierno a los que no recibió acceso de la autoridad competente."],
+D:["Um broker usa conscientemente declarações falsas ou enganosas para conseguir contratação em assunto aduaneiro.","Un broker usa a sabiendas declaraciones falsas o engañosas para conseguir empleo en un asunto aduanero."]},
+2:{q:["A AA Customs Brokers, Inc. tem licença corporativa e national permit. Tom, o broker individual que era o qualificador do national permit, renunciou. Qual o prazo máximo, a partir da renúncia, para indicar novo broker qualificador e evitar a revogação automática (by operation of law) do permit?","AA Customs Brokers, Inc. tiene licencia corporativa y national permit. Tom, el broker individual que era el calificador del national permit, renunció. ¿Cuál es el plazo máximo, desde la renuncia, para designar un nuevo broker calificador y evitar la revocación automática (by operation of law) del permit?"],
+A:["120 dias","120 días"],B:["60 dias","60 días"],C:["30 dias","30 días"],D:["180 dias","180 días"]},
+3:{q:["Até quando deve ser apresentada a petição inicial de alívio (petition for relief) em um caso de apreensão (seizure) e em um caso de penalidade (penalty)?","¿Hasta cuándo debe presentarse la petición inicial de alivio (petition for relief) en un caso de incautación (seizure) y en un caso de penalidad (penalty)?"],
+A:["Em até 60 dias do envio da notificação de apreensão ou da notificação de penalidade.","Dentro de 60 días del envío de la notificación de incautación o de penalidad."],
+B:["Em até 30 dias da data de envio da notificação de apreensão ou de penalidade.","Dentro de 30 días desde el envío de la notificación de incautación o de penalidad."],
+C:["Para apreensões, em até 60 dias do envio da notificação; para penalidades, em até 30 dias.","Para incautaciones, dentro de 60 días del envío; para penalidades, dentro de 30 días."],
+D:["Para apreensões, em até 30 dias do envio da notificação; para penalidades, em até 60 dias.","Para incautaciones, dentro de 30 días del envío; para penalidades, dentro de 60 días."]},
+4:{q:["Quais são os requisitos para o CBP considerar uma offer in compromise (proposta de acordo) sob o Tariff Act de 1930, decorrente de violação da legislação aduaneira?","¿Cuáles son los requisitos para que el CBP considere una offer in compromise (propuesta de acuerdo) bajo el Tariff Act de 1930, derivada de una violación de la ley aduanera?"],
+A:["Depósito de 20% do valor total oferecido e proposta por escrito.","Depósito del 20% del monto total ofrecido y una oferta por escrito."],
+B:["Entrega (tender) do valor específico oferecido e proposta por escrito.","Entrega (tender) del monto específico ofrecido y una oferta por escrito."],
+C:["Entrega do valor doméstico (domestic value) da reclamação e proposta por escrito.","Entrega del valor doméstico (domestic value) del reclamo y una oferta por escrito."],
+D:["Entrega de pelo menos US$ 1.000,00 e proposta por escrito.","Entrega de al menos US$ 1,000.00 y una oferta por escrito."]},
+5:{q:["Qual item a seguir NÃO precisa ser mantido pelo broker como comprovação de inscrição, participação ou conclusão da educação continuada qualificada (continuing broker education)?","¿Cuál de los siguientes NO necesita ser conservado por el broker como evidencia de inscripción, asistencia o finalización de la educación continua calificada (continuing broker education)?"],
+A:["O local onde o broker concluiu a educação continuada.","El lugar donde el broker completó la educación continua."],
+B:["O nome da entidade ou pessoa que ofereceu a educação continuada.","El nombre de la entidad o persona que ofreció la educación continua."],
+C:["As datas em que o broker participou da educação continuada.","Las fechas en que el broker asistió a la educación continua."],
+D:["As datas em que o broker recebeu o comprovante de conclusão da educação continuada.","Las fechas en que el broker recibió el comprobante de finalización de la educación continua."]},
+6:{q:["Quais pessoas e/ou entidades devem certificar o cumprimento da educação continuada junto com o status report exigido pelo 19 CFR 111.30(d)? i. Brokers individuais licenciados; ii. Partnerships licenciadas; iii. Associations licenciadas; iv. Corporations licenciadas.","¿Qué personas y/o entidades deben certificar el cumplimiento de la educación continua junto con el status report exigido por 19 CFR 111.30(d)? i. Brokers individuales licenciados; ii. Partnerships licenciadas; iii. Associations licenciadas; iv. Corporations licenciadas."],
+A:["i","i"],B:["i e ii","i y ii"],C:["ii, iii e iv","ii, iii y iv"],D:["i, ii, iii e iv","i, ii, iii y iv"]},
+7:{q:["A ZX Customs Brokers, Inc. (ZX) é uma corporation-broker. George Forest, broker individual licenciado, é VP de Compliance e qualificador da licença e do national permit da ZX. Em 01/05/2025, o CBP aceita a suspensão voluntária da licença individual de Forest por 1 ano, a partir de 05/05/2025 (saúde). Jayne Smythe, Import Manager da ZX, é broker licenciada, mas NÃO é officer formalmente nomeada da ZX. Qual afirmação é FALSA?","ZX Customs Brokers, Inc. (ZX) es una corporation-broker. George Forest, broker individual licenciado, es VP de Compliance y calificador de la licencia y del national permit de ZX. El 01/05/2025, el CBP acepta la suspensión voluntaria de la licencia individual de Forest por 1 año, desde el 05/05/2025 (salud). Jayne Smythe, Import Manager de ZX, es broker licenciada, pero NO es officer formalmente designada de ZX. ¿Qué afirmación es FALSA?"],
+A:["A ZX pode notificar o CBP nomeando a Import Manager Smythe como qualificadora do national permit e continuar o customs business até o permit anual expirar em 31/12/2025.","ZX puede notificar al CBP designando a la Import Manager Smythe como calificadora del national permit y continuar el customs business hasta que el permit anual expire el 31/12/2025."],
+B:["A ZX pode oferecer por escrito a suspensão voluntária de sua licença e permit por 1 ano, acompanhando a suspensão de Forest, e interromper o customs business no período.","ZX puede ofrecer por escrito la suspensión voluntaria de su licencia y permit por 1 año, acompañando la suspensión de Forest, y suspender el customs business durante ese período."],
+C:["A ZX pode nomear Smythe como VP de Import Compliance, notificar o CBP de que ela será a nova qualificadora da licença e do permit a partir de 05/05/2025, e continuar o customs business.","ZX puede nombrar a Smythe como VP de Import Compliance, notificar al CBP que ella será la nueva calificadora de la licencia y del permit desde el 05/05/2025, y continuar el customs business."],
+D:["Antes de 02/09/2025, a ZX pode contratar o Dr. Hu (broker licenciado) como VP de Import Compliance, designá-lo qualificador da licença e Smythe qualificadora do national permit e, após informar o CBP e cumprir os demais requisitos, continuar o customs business.","Antes del 02/09/2025, ZX puede contratar al Dr. Hu (broker licenciado) como VP de Import Compliance, designarlo calificador de la licencia y a Smythe calificadora del national permit y, tras informar al CBP y cumplir los demás requisitos, continuar el customs business."]},
+8:{q:["Suzy Smith é broker licenciada (Processing Center de Miami) e quer um national permit individual. A aplicação já incluiu: (1) nº/data da licença; (2) endereço, telefone e e-mail do office of record; (3) ponto de contato; (4) lista de funcionários conforme 19 CFR 111.28; (5) local de guarda dos registros; (6) funcionário responsável pelos registros e finanças; (7) comprovante das taxas do 111.96(b)-(c). Que material adicional falta para completar a aplicação?","Suzy Smith es broker licenciada (Processing Center de Miami) y quiere un national permit individual. La solicitud ya incluyó: (1) nº/fecha de licencia; (2) dirección, teléfono y correo del office of record; (3) punto de contacto; (4) lista de empleados según 19 CFR 111.28; (5) lugar de conservación de registros; (6) empleado responsable de registros y finanzas; (7) comprobante de las tarifas del 111.96(b)-(c). ¿Qué material adicional falta para completar la solicitud?"],
+A:["Um pedido para transferir a supervisão de sua licença para a sede (Headquarters) do CBP.","Una solicitud para trasladar la supervisión de su licencia a la sede (Headquarters) del CBP."],
+B:["Uma dispensa (waiver) do exame do national permit.","Una exención (waiver) del examen del national permit."],
+C:["Um plano de supervisão descrevendo como exercerá responsible supervision and control sobre o customs business conduzido sob o national permit.","Un plan de supervisión que describa cómo ejercerá responsible supervision and control sobre el customs business realizado bajo el national permit."],
+D:["Uma lista de empregadores anteriores, relacionados ou não à atividade aduaneira.","Una lista de empleadores anteriores, relacionados o no con la actividad aduanera."]},
+9:{q:["Quando um protest é apresentado em nome de um principal por um agente que NÃO é advogado nem customs broker (ou funcionário autorizado), que documento deve ser apresentado junto para demonstrar que o agente está autorizado a protestar?","Cuando un protest es presentado en nombre de un principal por un agente que NO es abogado ni customs broker (o empleado autorizado), ¿qué documento debe presentarse para demostrar que el agente está autorizado a protestar?"],
+A:["Atos constitutivos (articles of incorporation)","Actas constitutivas (articles of incorporation)"],
+B:["Certificate of authority","Certificate of authority"],
+C:["Carta de intenções","Carta de intención"],
+D:["Procuração (power of attorney)","Poder (power of attorney)"]},
+10:{q:["O Departamento de Defesa (DoD) contrata um broker licenciado para importar equipamento de blindagem para um novo veículo militar não tripulado. O DoD instrui que a procuração (POA) NÃO seria necessária pela natureza sensível da importação e por ser por conta do DoD. Qual afirmação é VERDADEIRA?","El Departamento de Defensa (DoD) contrata a un broker licenciado para importar equipo de blindaje para un nuevo vehículo militar no tripulado. El DoD instruye que el poder (POA) NO sería necesario por la naturaleza sensible de la importación y por ser por cuenta del DoD. ¿Qué afirmación es VERDADERA?"],
+A:["Mercadoria importada pelo DoD é automaticamente isenta de impostos (duty-free).","La mercancía importada por el DoD es automáticamente libre de impuestos (duty-free)."],
+B:["A POA não é exigida quando o DoD é o Importer of Record, por sensibilidades inerentes.","El POA no se exige cuando el DoD es el Importer of Record, por sensibilidades inherentes."],
+C:["Mercadoria importada por órgão do governo dos EUA é isenta de exame pelo CBP.","La mercancía importada por una agencia del gobierno de EE. UU. está exenta de examen por el CBP."],
+D:["Mercadoria importada pelo DoD, ou por sua conta, está sujeita aos requisitos ordinários de entry, e a POA é exigida quando se usa um customs broker.","La mercancía importada por el DoD, o por su cuenta, está sujeta a los requisitos ordinarios de entry, y el POA se exige cuando se usa un customs broker."]}
+}
+};
+
+// Propaga o cenário completo para as questões "Mesmo cenário..." (sobrevive ao embaralhamento do simulado)
+[QUESTIONS,OCT2024,MAY2024,OCT2025,APR2025].forEach(arr=>{
+  let full=null;
+  arr.forEach(q=>{
+    if(!q.scenario)return;
+    if(/^Mesmo cen[aá]rio/i.test(q.scenario)){ if(full)q.scenario=full+"\n\n➕ "+q.scenario; }
+    else if(q.scenario.length>350)full=q.scenario;
+  });
+});
 const EXAMS=[
   {id:"abr2026",label:"Abril 2026",qs:QUESTIONS},
   {id:"out2025",label:"Outubro 2025",qs:OCT2025},
@@ -990,6 +1050,9 @@ readSlow:{pt:"Modo lento",en:"Slow mode",es:"Modo lento"},
 readStop:{pt:"Parar",en:"Stop",es:"Detener"},
 readNote:{pt:"Frases de treino no estilo do teste de leitura do USCIS (no teste oficial você lê UMA frase corretamente, em inglês). As vozes vêm do seu celular/computador — a qualidade varia por aparelho.",en:"Practice sentences in the style of the USCIS reading test (in the official test you read ONE sentence correctly, in English). Voices come from your phone/computer — quality varies by device.",es:"Frases de práctica al estilo del examen de lectura del USCIS (en el examen oficial lees UNA frase correctamente, en inglés). Las voces vienen de tu teléfono/computadora — la calidad varía según el dispositivo."},
 readUnsupported:{pt:"Seu navegador não suporta síntese de voz. Tente no Chrome, Safari ou Edge.",en:"Your browser does not support speech synthesis. Try Chrome, Safari or Edge.",es:"Tu navegador no soporta síntesis de voz. Prueba en Chrome, Safari o Edge."},
+readSetCiv:{pt:"🇺🇸 Cidadania",en:"🇺🇸 Citizenship",es:"🇺🇸 Ciudadanía"},
+readSetCble:{pt:"📦 CBLE — termos-chave",en:"📦 CBLE — key terms",es:"📦 CBLE — términos clave"},
+readCbleLead:{pt:"O vocabulário que decide a prova: ouça cada termo em inglês numa frase de exame e entenda na sua língua.",en:"The vocabulary that decides the exam: hear each term in an exam-style English sentence and understand it in your language.",es:"El vocabulario que decide el examen: escucha cada término en una frase de examen en inglés y entiéndelo en tu idioma."},
 civListen:{pt:"Ouvir em inglês",en:"Listen in English",es:"Escuchar en inglés"},
 civTrLabel:{pt:"Tradução — entenda, mas responda em inglês!",en:"",es:"Traducción — entiende, ¡pero responde en inglés!"},
 drillBtn:{pt:"🧭 Treino de Navegação",en:"🧭 Navigation Drill",es:"🧭 Entrenamiento de Navegación"},
@@ -1013,6 +1076,9 @@ gateLead:{pt:"Digite o código de acesso para entrar.",en:"Enter the access code
 gateBtn:{pt:"Entrar",en:"Enter",es:"Entrar"},
 gateErr:{pt:"Código incorreto.",en:"Wrong code.",es:"Código incorrecto."},
 listenQ:{pt:"🔊 Ouvir questão e alternativas",en:"🔊 Listen to question & options",es:"🔊 Escuchar pregunta y opciones"},
+scnLabel:{pt:"📋 CENÁRIO DO EXERCÍCIO PRÁTICO — resumo dos documentos da prova (AWB, faturas, formulários)",en:"📋 PRACTICAL EXERCISE SCENARIO — summary of the exam documents (AWB, invoices, forms)",es:"📋 ESCENARIO DEL EJERCICIO PRÁCTICO — resumen de los documentos del examen (AWB, facturas, formularios)"},
+trShow:{pt:"🌐 Traduzir para português",en:"",es:"🌐 Traducir al español"},
+trHide:{pt:"🌐 Esconder tradução",en:"",es:"🌐 Ocultar traducción"},
 guideTitle:{pt:"Como estudar aqui",en:"How to study here",es:"Cómo estudiar aquí"},
 guidePractice:{pt:"<b>PRATICAR</b> ensina: uma questão por vez, correção na hora, dica de onde buscar no livro (💡 em 3 níveis) e o 🧭 Treino de Navegação contra o relógio.",en:"<b>PRACTICE</b> teaches: one question at a time, instant grading, where-to-look hints (💡 in 3 levels) and the 🧭 timed Navigation Drill.",es:"<b>PRACTICAR</b> enseña: una pregunta a la vez, corrección al instante, pistas de dónde buscar en el libro (💡 en 3 niveles) y el 🧭 Entrenamiento de Navegación contra el reloj."},
 guideExam:{pt:"<b>SIMULADO</b> mede: prova completa com cronômetro no ritmo oficial, sem correção durante — a nota sai no final. Faça 1 por semana.",en:"<b>MOCK EXAM</b> measures: full exam with a timer at the official pace, no grading during — results at the end. Do 1 per week.",es:"<b>SIMULACRO</b> mide: examen completo con cronómetro al ritmo oficial, sin corrección durante — la nota sale al final. Haz 1 por semana."},
@@ -1027,10 +1093,10 @@ function renderLangs(){$("langs").innerHTML=["pt","en","es"].map(l=>`<button cla
 
 // ---------- estado (em memória, zera ao recarregar) ----------
 let view="home";
-let practice={list:[],idx:0,answered:null,pick:null,chat:[],loading:false,hintLvl:0};
+let practice={list:[],idx:0,answered:null,pick:null,chat:[],loading:false,hintLvl:0,showTr:false};
 let stats=stGet("stats")||{}; Object.keys(CATS).forEach(c=>{if(!stats[c])stats[c]={correct:0,total:0};});
 let examHist=stGet("examhist")||[];
-let exam={active:false,qs:[],answers:{},idx:0,end:0,timerId:null,done:false,score:null,hintLvl:0};
+let exam={active:false,qs:[],answers:{},idx:0,end:0,timerId:null,done:false,score:null,hintLvl:0,showTr:false};
 
 const $=id=>document.getElementById(id);
 const app=()=>$("app");
@@ -1100,7 +1166,9 @@ function startPractice(cat){
   practice.list = cat==="all" ? p.slice() : p.filter(q=>q.cat===cat);
   practice.idx=0; resetQ(); renderPractice();
 }
-function resetQ(){practice.answered=null;practice.pick=null;practice.chat=[];practice.loading=false;practice.hintLvl=0;}
+function resetQ(){practice.answered=null;practice.pick=null;practice.chat=[];practice.loading=false;practice.hintLvl=0;practice.showTr=false;}
+function cbleTr(q){if(lang==="en")return null;const e=(typeof CBLE_TR!=="undefined"&&CBLE_TR[q.exam])?CBLE_TR[q.exam][q.n]:null;return e||null;}
+const trIdx=()=>lang==="pt"?0:1;
 
 // ---------- DICA "ONDE BUSCAR" (gerada da citação oficial) ----------
 const PART_NAMES={
@@ -1191,10 +1259,12 @@ function renderPractice(){
   </div>
   <div class="card">
     <span class="badge">${examLabel(q.exam)} · Q${q.n} · ${catName(q.cat)}</span>
-    ${q.scenario?`<div class="scenario">${esc(q.scenario)} <button class="spk" onclick="speakPracticeScenario()" title="🔊 PT">🔊</button></div>`:""}
+    ${q.scenario?`<div class="scenario"><div class="scnlabel">${t("scnLabel")}</div>${esc(q.scenario)} <button class="spk" onclick="speakPracticeScenario()" title="🔊 PT">🔊</button></div>`:""}
     <div class="qtext">${esc(q.q)}</div>
+    ${practice.showTr&&cbleTr(q)?`<div class="flashtr">${esc(cbleTr(q).q[trIdx()])}</div>`:""}
     <div class="rowbtns" style="margin:8px 0 2px">
       <button class="ghost" onclick="speakPracticeQ()">${t("listenQ")}</button>
+      ${cbleTr(q)?`<button class="ghost" onclick="practice.showTr=!practice.showTr;renderPractice()">${practice.showTr?t("trHide"):t("trShow")}</button>`:""}
       <button class="ghost" onclick="practice.hintLvl=practice.hintLvl?0:1;renderPractice()">${practice.hintLvl?t("hintHide"):t("hintShow")}</button>
       ${practice.hintLvl>0&&practice.hintLvl<3?`<button class="ghost" onclick="practice.hintLvl++;renderPractice()">🔎 ${t("hintDeeper")}</button>`:""}
     </div>
@@ -1207,7 +1277,7 @@ function renderPractice(){
           else if(L===practice.pick)cls+=" wrong";
           else cls+=" dim";
         }
-        return `<button class="${cls}" ${done?"disabled":""} onclick="answerPractice('${L}')"><span class="letter">${L})</span><span>${esc(q.opts[L])}</span></button>`;
+        return `<button class="${cls}" ${done?"disabled":""} onclick="answerPractice('${L}')"><span class="letter">${L})</span><span>${esc(q.opts[L])}${practice.showTr&&cbleTr(q)?`<span class="opttr">${esc(cbleTr(q)[L][trIdx()])}</span>`:""}</span></button>`;
       }).join("")}
     </div>
     ${done?renderFeedback(q):""}
@@ -1308,10 +1378,12 @@ function renderExam(){
   </div>
   <div class="card">
     <span class="badge">${examLabel(q.exam)} · Q${q.n} · ${catName(q.cat)}</span>
-    ${q.scenario?`<div class="scenario">${esc(q.scenario)} <button class="spk" onclick="speakExamScenario()" title="🔊 PT">🔊</button></div>`:""}
+    ${q.scenario?`<div class="scenario"><div class="scnlabel">${t("scnLabel")}</div>${esc(q.scenario)} <button class="spk" onclick="speakExamScenario()" title="🔊 PT">🔊</button></div>`:""}
     <div class="qtext">${esc(q.q)}</div>
+    ${exam.showTr&&cbleTr(q)?`<div class="flashtr">${esc(cbleTr(q).q[trIdx()])}</div>`:""}
     <div class="rowbtns" style="margin:8px 0 2px">
       <button class="ghost" onclick="speakExamQ()">${t("listenQ")}</button>
+      ${cbleTr(q)?`<button class="ghost" onclick="exam.showTr=!exam.showTr;renderExam()">${exam.showTr?t("trHide"):t("trShow")}</button>`:""}
       <button class="ghost" onclick="exam.hintLvl=exam.hintLvl?0:1;renderExam()">${exam.hintLvl?t("hintHide"):t("hintShow")}</button>
       ${exam.hintLvl>0&&exam.hintLvl<3?`<button class="ghost" onclick="exam.hintLvl++;renderExam()">🔎 ${t("hintDeeper")}</button>`:""}
     </div>
@@ -1319,18 +1391,18 @@ function renderExam(){
     <div class="opts">
       ${["A","B","C","D"].map(L=>{
         const s=exam.answers[uid(q)]===L;
-        return `<button class="opt" style="${s?'border-color:var(--navy);background:#EEF3F9;font-weight:600':''}" onclick="pickExam('${uid(q)}','${L}')"><span class="letter">${L})</span><span>${esc(q.opts[L])}</span></button>`;
+        return `<button class="opt" style="${s?'border-color:var(--navy);background:#EEF3F9;font-weight:600':''}" onclick="pickExam('${uid(q)}','${L}')"><span class="letter">${L})</span><span>${esc(q.opts[L])}${exam.showTr&&cbleTr(q)?`<span class="opttr">${esc(cbleTr(q)[L][trIdx()])}</span>`:""}</span></button>`;
       }).join("")}
     </div>
     <div class="rowbtns">
-      <button class="ghost" ${exam.idx===0?"disabled":""} onclick="exam.idx--;exam.hintLvl=0;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)">${t("prev")}</button>
-      <button class="primary" ${exam.idx>=exam.qs.length-1?"disabled":""} onclick="exam.idx++;exam.hintLvl=0;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)">${t("next")}</button>
+      <button class="ghost" ${exam.idx===0?"disabled":""} onclick="exam.idx--;exam.hintLvl=0;exam.showTr=false;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)">${t("prev")}</button>
+      <button class="primary" ${exam.idx>=exam.qs.length-1?"disabled":""} onclick="exam.idx++;exam.hintLvl=0;exam.showTr=false;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)">${t("next")}</button>
     </div>
   </div>
   <div class="card">
     <h3>${t("sheet")}</h3>
     <div class="sheet">
-      ${exam.qs.map((qq,i)=>`<button class="${exam.answers[uid(qq)]?'done':''} ${i===exam.idx?'cur':''}" onclick="exam.idx=${i};exam.hintLvl=0;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)" title="${examLabel(qq.exam)} Q${qq.n}">${i+1}</button>`).join("")}
+      ${exam.qs.map((qq,i)=>`<button class="${exam.answers[uid(qq)]?'done':''} ${i===exam.idx?'cur':''}" onclick="exam.idx=${i};exam.hintLvl=0;exam.showTr=false;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)" title="${examLabel(qq.exam)} Q${qq.n}">${i+1}</button>`).join("")}
     </div>
   </div>`;
   tickClock();
@@ -1340,7 +1412,7 @@ function startExam(){
   let qs=pool().slice();
   if(sel.size>1)qs=shuffle(qs);
   const ms=Math.round(qs.length*3.375)*60*1000;
-  exam={active:true,qs,answers:{},idx:0,end:Date.now()+ms,timerId:setInterval(tickClock,1000),done:false,score:null,hintLvl:0};
+  exam={active:true,qs,answers:{},idx:0,end:Date.now()+ms,timerId:setInterval(tickClock,1000),done:false,score:null,hintLvl:0,showTr:false};
   renderExam();
 }
 function pickExam(k,L){exam.answers[k]=L;renderExam();}
@@ -1610,7 +1682,30 @@ const READING=[
 {en:"Labor Day is in September.",pt:"O Dia do Trabalho é em setembro.",es:"El Día del Trabajo es en septiembre."},
 {en:"Thanksgiving is in November.",pt:"O Dia de Ação de Graças é em novembro.",es:"El Día de Acción de Gracias es en noviembre."}
 ];
-let tts={slow:false,playing:-1,voices:[]};
+const READING_CBLE=[
+{en:"The customs broker files the entry on behalf of the importer.",pt:"O customs broker registra a entry em nome do importador.",es:"El customs broker presenta la entry en nombre del importador."},
+{en:"The entry summary must be filed within ten working days.",pt:"O entry summary deve ser apresentado em até dez dias úteis.",es:"El entry summary debe presentarse dentro de diez días hábiles."},
+{en:"Liquidation is the final computation of duties by CBP.",pt:"Liquidation (liquidação) é o cálculo final dos tributos pelo CBP.",es:"La liquidation (liquidación) es el cálculo final de los tributos por el CBP."},
+{en:"A protest may be filed within 180 days of liquidation.",pt:"Um protest pode ser apresentado em até 180 dias da liquidação.",es:"Un protest puede presentarse dentro de 180 días de la liquidación."},
+{en:"Drawback is a refund of duties on exported merchandise.",pt:"Drawback é a devolução de tributos sobre mercadoria exportada.",es:"El drawback es el reembolso de tributos sobre mercancía exportada."},
+{en:"The merchandise moved in bond to another port.",pt:"A mercadoria seguiu in-bond (trânsito aduaneiro) para outro porto.",es:"La mercancía viajó in-bond (tránsito aduanero) a otro puerto."},
+{en:"Goods may remain in a bonded warehouse for five years.",pt:"Mercadorias podem permanecer em bonded warehouse (armazém alfandegado) por cinco anos.",es:"Las mercancías pueden permanecer en un bonded warehouse (depósito aduanero) por cinco años."},
+{en:"A foreign trade zone is outside the customs territory for duty purposes.",pt:"Uma foreign trade zone fica fora do território aduaneiro para fins de tributos.",es:"Una foreign trade zone está fuera del territorio aduanero para fines de tributos."},
+{en:"The country of origin must be marked on the article.",pt:"O país de origem deve estar marcado no artigo.",es:"El país de origen debe estar marcado en el artículo."},
+{en:"Transaction value is the price actually paid or payable.",pt:"Transaction value é o preço efetivamente pago ou a pagar.",es:"El transaction value es el precio realmente pagado o por pagar."},
+{en:"An assist must be added to the price actually paid.",pt:"Um assist deve ser somado ao preço efetivamente pago.",es:"Un assist debe sumarse al precio realmente pagado."},
+{en:"The quota filled before the entry was presented.",pt:"A quota (cota) esgotou antes da apresentação da entry.",es:"La quota (cuota) se llenó antes de presentar la entry."},
+{en:"A customs broker must hold a valid license and permit.",pt:"Um customs broker precisa ter licença e permit válidos.",es:"Un customs broker debe tener licencia y permit válidos."},
+{en:"The power of attorney authorizes the broker to act for the importer.",pt:"A power of attorney (procuração) autoriza o broker a agir pelo importador.",es:"El power of attorney (poder) autoriza al broker a actuar por el importador."},
+{en:"Classification is determined under the HTSUS.",pt:"A classificação é determinada pelo HTSUS.",es:"La clasificación se determina según el HTSUS."},
+{en:"The merchandise processing fee applies to formal entries.",pt:"A merchandise processing fee (MPF) aplica-se a entries formais.",es:"La merchandise processing fee (MPF) se aplica a entries formales."},
+{en:"The surety guarantees payment under the bond.",pt:"A surety (fiadora) garante o pagamento sob o bond.",es:"La surety (fiadora) garantiza el pago bajo el bond."},
+{en:"Importers must use reasonable care when making entry.",pt:"Importadores devem agir com reasonable care ao fazer a entry.",es:"Los importadores deben actuar con reasonable care al hacer la entry."},
+{en:"The shipment arrived at the port of entry.",pt:"O embarque chegou ao porto de entrada.",es:"El embarque llegó al puerto de entrada."},
+{en:"CBP may demand redelivery of released merchandise.",pt:"O CBP pode exigir a redelivery (redevolução) de mercadoria já liberada.",es:"El CBP puede exigir la redelivery (redevolución) de mercancía ya liberada."}
+];
+let tts={slow:false,playing:-1,voices:[],set:"civ"};
+function curReading(){return tts.set==="cble"?READING_CBLE:READING;}
 function ttsInit(){
   if(!("speechSynthesis" in window))return;
   const load=()=>{tts.voices=speechSynthesis.getVoices();};
@@ -1634,9 +1729,9 @@ function ttsSpeak(text,lc,onend){
   if(onend)u.onend=onend;
   speechSynthesis.speak(u);
 }
-function ttsOne(i,lc){ttsStop();const s=READING[i];tts.playing=i;renderReading();ttsSpeak(s[lc],lc,()=>{tts.playing=-1;renderReading();});}
+function ttsOne(i,lc){ttsStop();const s=curReading()[i];tts.playing=i;renderReading();ttsSpeak(s[lc],lc,()=>{tts.playing=-1;renderReading();});}
 function ttsAll(i){ // fala EN → PT → ES em sequência
-  ttsStop();const s=READING[i];tts.playing=i;renderReading();
+  ttsStop();const s=curReading()[i];tts.playing=i;renderReading();
   ttsSpeak(s.en,"en",()=>ttsSpeak(s.pt,"pt",()=>ttsSpeak(s.es,"es",()=>{tts.playing=-1;renderReading();})));
 }
 function ttsToggleRead(parts,lc){
@@ -1661,13 +1756,18 @@ function renderReading(){
     <h2>${t("readTitle")}</h2>
     <p class="lead">${t("readLead")}</p>
     <div class="rowbtns">
+      <button class="${tts.set==='civ'?'primary':'ghost'}" onclick="ttsStop();tts.set='civ';renderReading()">${t("readSetCiv")}</button>
+      <button class="${tts.set==='cble'?'primary':'ghost'}" onclick="ttsStop();tts.set='cble';renderReading()">${t("readSetCble")}</button>
+    </div>
+    ${tts.set==='cble'?`<p class="note">${t("readCbleLead")}</p>`:""}
+    <div class="rowbtns">
       <button class="${tts.slow?'primary':'ghost'}" onclick="tts.slow=!tts.slow;renderReading()">🐢 ${t("readSlow")}${tts.slow?" ✓":""}</button>
       <button class="ghost" onclick="ttsStop()">⏹ ${t("readStop")}</button>
     </div>
     <p class="note">${t("readNote")}</p>
     ${(!hasVoice("pt")||!hasVoice("es"))?`<p class="note" style="background:#FDF3E7;border:1px solid #E8C89A;border-radius:8px;padding:9px 12px;color:#7A5A1E">${t("voiceTip")}</p>`:""}
   </div>
-  ${READING.map((s,i)=>`
+  ${curReading().map((s,i)=>`
   <div class="card readrow ${tts.playing===i?'nowplaying':''}">
     <button class="playbig" onclick="ttsAll(${i})" title="EN → PT → ES">${tts.playing===i?"🔊":"▶"}</button>
     <div class="readtexts">

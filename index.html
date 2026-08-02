@@ -1008,7 +1008,9 @@ hintLvlExact:{pt:"a seção exata",en:"the exact section",es:"la sección exacta
 gateTitle:{pt:"Acesso restrito",en:"Restricted access",es:"Acceso restringido"},
 gateLead:{pt:"Digite o código de acesso para entrar.",en:"Enter the access code to continue.",es:"Ingresa el código de acceso para continuar."},
 gateBtn:{pt:"Entrar",en:"Enter",es:"Entrar"},
-gateErr:{pt:"Código incorreto.",en:"Wrong code.",es:"Código incorrecto."}
+gateErr:{pt:"Código incorreto.",en:"Wrong code.",es:"Código incorrecto."},
+listenQ:{pt:"🔊 Ouvir questão e alternativas",en:"🔊 Listen to question & options",es:"🔊 Escuchar pregunta y opciones"},
+voiceTip:{pt:"⚠️ Este aparelho não tem voz em português e/ou espanhol instalada — nesses idiomas o áudio pode sair mudo ou com sotaque inglês. iPhone: Ajustes → Acessibilidade → Conteúdo Falado → Vozes → adicionar o idioma. Android: Configurações → Sistema → Conversão de texto em voz → instalar idiomas.",en:"⚠️ This device does not have Portuguese and/or Spanish voices installed — audio in those languages may be silent or spoken with an English accent. iPhone: Settings → Accessibility → Spoken Content → Voices → add the language. Android: Settings → System → Text-to-speech → install languages.",es:"⚠️ Este dispositivo no tiene voces en portugués y/o español instaladas — el audio en esos idiomas puede salir mudo o con acento inglés. iPhone: Ajustes → Accesibilidad → Contenido hablado → Voces → agregar el idioma. Android: Ajustes → Sistema → Texto a voz → instalar idiomas."}
 };
 const t=k=>(T[k]&&(T[k][lang]||T[k].pt))||k;
 function setLang(l){lang=l;stSet("lang",l);renderLangs();render();}
@@ -1173,7 +1175,8 @@ function renderPractice(){
   <div class="card">
     <span class="badge">${examLabel(q.exam)} · Q${q.n} · ${catName(q.cat)}</span>
     ${q.scenario?`<div class="scenario">${esc(q.scenario)} <button class="spk" onclick="speakPracticeScenario()" title="🔊 PT">🔊</button></div>`:""}
-    <div class="qtext">${esc(q.q)} <button class="spk" onclick="speakPracticeQ()" title="${t('civListen')}">🔊</button></div>
+    <div class="qtext">${esc(q.q)}</div>
+    <div class="rowbtns" style="margin:8px 0 2px"><button class="ghost" onclick="speakPracticeQ()">${t("listenQ")}</button></div>
     <div class="opts">
       ${["A","B","C","D"].map(L=>{
         let cls="opt";
@@ -1289,7 +1292,8 @@ function renderExam(){
   <div class="card">
     <span class="badge">${examLabel(q.exam)} · Q${q.n} · ${catName(q.cat)}</span>
     ${q.scenario?`<div class="scenario">${esc(q.scenario)} <button class="spk" onclick="speakExamScenario()" title="🔊 PT">🔊</button></div>`:""}
-    <div class="qtext">${esc(q.q)} <button class="spk" onclick="speakExamQ()" title="${t('civListen')}">🔊</button></div>
+    <div class="qtext">${esc(q.q)}</div>
+    <div class="rowbtns" style="margin:8px 0 2px"><button class="ghost" onclick="speakExamQ()">${t("listenQ")}</button></div>
     <div class="opts">
       ${["A","B","C","D"].map(L=>{
         const s=exam.answers[uid(q)]===L;
@@ -1596,11 +1600,13 @@ function ttsInit(){
   load();speechSynthesis.onvoiceschanged=load;
 }
 function ttsVoice(lc){
+  if(!tts.voices.length&&ttsSupported())tts.voices=speechSynthesis.getVoices();
   const pref={en:["en-US","en_US","en-GB","en"],pt:["pt-BR","pt_BR","pt-PT","pt"],es:["es-US","es-MX","es-419","es-ES","es"]}[lc]||["en"];
   for(const p of pref){const v=tts.voices.find(v=>v.lang.replace("_","-").toLowerCase().startsWith(p.replace("_","-").toLowerCase()));if(v)return v;}
   return null;
 }
 function ttsSupported(){return "speechSynthesis" in window;}
+function hasVoice(lc){return !!ttsVoice(lc);}
 function ttsStop(){if(ttsSupported()){speechSynthesis.cancel();}tts.playing=-1;if(view==="reading")renderReading();}
 function ttsSpeak(text,lc,onend){
   if(!ttsSupported())return;
@@ -1642,6 +1648,7 @@ function renderReading(){
       <button class="ghost" onclick="ttsStop()">⏹ ${t("readStop")}</button>
     </div>
     <p class="note">${t("readNote")}</p>
+    ${(!hasVoice("pt")||!hasVoice("es"))?`<p class="note" style="background:#FDF3E7;border:1px solid #E8C89A;border-radius:8px;padding:9px 12px;color:#7A5A1E">${t("voiceTip")}</p>`:""}
   </div>
   ${READING.map((s,i)=>`
   <div class="card readrow ${tts.playing===i?'nowplaying':''}">

@@ -57,6 +57,8 @@ p.lead{color:var(--muted);font-size:14.5px;line-height:1.55}
 .trlist li{color:#4a5866;font-size:13.5px}
 .spk{background:transparent;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:15px;padding:3px 8px;vertical-align:middle;margin-left:6px}
 .spk:hover{background:#EEF3F9;border-color:var(--navy2)}
+.ansreveal{background:#F1F8F3;border-left:4px solid var(--ok);border-radius:0 8px 8px 0;padding:10px 14px;margin:10px 0;font-size:14px;line-height:1.5}
+.guideline{font-size:13.5px;line-height:1.55;margin:7px 0;color:#3a4652}
 .tile.soon{opacity:.75;border-style:dashed;cursor:default;position:relative}
 .tile.soon:hover{transform:none;box-shadow:none}
 .soonbadge{position:absolute;top:10px;right:10px;background:var(--gold);color:#1C2733;font-family:'Spline Sans Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:.8px;padding:3px 8px;border-radius:999px}
@@ -1000,6 +1002,7 @@ drillAcc:{pt:"Fontes certas",en:"Right sources",es:"Fuentes correctas"},
 drillMsg:{pt:"Na prova, achar a resposta em 3 minutos em vez de 8 é o que decide a aprovação. Meta: apontar a fonte em menos de 15 segundos.",en:"In the exam, finding the answer in 3 minutes instead of 8 is what decides passing. Goal: point to the source in under 15 seconds.",es:"En el examen, encontrar la respuesta en 3 minutos en vez de 8 es lo que decide la aprobación. Meta: señalar la fuente en menos de 15 segundos."},
 drillDone:{pt:"Rodada concluída",en:"Round complete",es:"Ronda completada"},
 drillAgain:{pt:"Nova rodada",en:"New round",es:"Nueva ronda"},
+drillAnswer:{pt:"Resposta da questão",en:"Answer to the question",es:"Respuesta de la pregunta"},
 hintDeeper:{pt:"Um passo mais fundo",en:"One step deeper",es:"Un paso más profundo"},
 hintLvl:{pt:"Nível",en:"Level",es:"Nivel"},
 hintLvlBook:{pt:"o livro",en:"the book",es:"el libro"},
@@ -1010,6 +1013,12 @@ gateLead:{pt:"Digite o código de acesso para entrar.",en:"Enter the access code
 gateBtn:{pt:"Entrar",en:"Enter",es:"Entrar"},
 gateErr:{pt:"Código incorreto.",en:"Wrong code.",es:"Código incorrecto."},
 listenQ:{pt:"🔊 Ouvir questão e alternativas",en:"🔊 Listen to question & options",es:"🔊 Escuchar pregunta y opciones"},
+guideTitle:{pt:"Como estudar aqui",en:"How to study here",es:"Cómo estudiar aquí"},
+guidePractice:{pt:"<b>PRATICAR</b> ensina: uma questão por vez, correção na hora, dica de onde buscar no livro (💡 em 3 níveis) e o 🧭 Treino de Navegação contra o relógio.",en:"<b>PRACTICE</b> teaches: one question at a time, instant grading, where-to-look hints (💡 in 3 levels) and the 🧭 timed Navigation Drill.",es:"<b>PRACTICAR</b> enseña: una pregunta a la vez, corrección al instante, pistas de dónde buscar en el libro (💡 en 3 niveles) y el 🧭 Entrenamiento de Navegación contra el reloj."},
+guideExam:{pt:"<b>SIMULADO</b> mede: prova completa com cronômetro no ritmo oficial, sem correção durante — a nota sai no final. Faça 1 por semana.",en:"<b>MOCK EXAM</b> measures: full exam with a timer at the official pace, no grading during — results at the end. Do 1 per week.",es:"<b>SIMULACRO</b> mide: examen completo con cronómetro al ritmo oficial, sin corrección durante — la nota sale al final. Haz 1 por semana."},
+guideCivics:{pt:"<b>CIVICS 🇺🇸</b> é a cidadania: as 128 perguntas oficiais em cartas inteligentes que voltam na hora certa de revisar. 15 min por dia bastam.",en:"<b>CIVICS 🇺🇸</b> is citizenship: the 128 official questions as smart flashcards that return right when it's time to review. 15 min a day is enough.",es:"<b>CIVICS 🇺🇸</b> es la ciudadanía: las 128 preguntas oficiales en tarjetas inteligentes que vuelven justo cuando toca repasar. 15 min al día bastan."},
+guideReading:{pt:"<b>LEITURA 🔊</b> treina o ouvido: frases faladas em inglês → português → espanhol, com modo lento. Ouça e repita em voz alta.",en:"<b>READING 🔊</b> trains your ear: sentences spoken in English → Portuguese → Spanish, with slow mode. Listen and repeat out loud.",es:"<b>LECTURA 🔊</b> entrena el oído: frases habladas en inglés → portugués → español, con modo lento. Escucha y repite en voz alta."},
+guideMotto:{pt:"Resumo: Praticar ensina · Simulado mede · Civics é a cidadania · Leitura treina o ouvido.",en:"In short: Practice teaches · Mock Exam measures · Civics is citizenship · Reading trains your ear.",es:"En resumen: Practicar enseña · Simulacro mide · Civics es la ciudadanía · Lectura entrena el oído."},
 voiceTip:{pt:"⚠️ Este aparelho não tem voz em português e/ou espanhol instalada — nesses idiomas o áudio pode sair mudo ou com sotaque inglês. iPhone: Ajustes → Acessibilidade → Conteúdo Falado → Vozes → adicionar o idioma. Android: Configurações → Sistema → Conversão de texto em voz → instalar idiomas.",en:"⚠️ This device does not have Portuguese and/or Spanish voices installed — audio in those languages may be silent or spoken with an English accent. iPhone: Settings → Accessibility → Spoken Content → Voices → add the language. Android: Settings → System → Text-to-speech → install languages.",es:"⚠️ Este dispositivo no tiene voces en portugués y/o español instaladas — el audio en esos idiomas puede salir mudo o con acento inglés. iPhone: Ajustes → Accesibilidad → Contenido hablado → Voces → agregar el idioma. Android: Ajustes → Sistema → Texto a voz → instalar idiomas."}
 };
 const t=k=>(T[k]&&(T[k][lang]||T[k].pt))||k;
@@ -1043,6 +1052,14 @@ function renderHome(){
     <p class="lead">${t("homeLead")}</p>
   </div>
   ${examSelector()}
+  <div class="card" style="border-left:4px solid var(--navy2)">
+    <h3>🗺️ ${t("guideTitle")}</h3>
+    <p class="guideline">1️⃣ ${t("guidePractice")}</p>
+    <p class="guideline">2️⃣ ${t("guideExam")}</p>
+    <p class="guideline">3️⃣ ${t("guideCivics")}</p>
+    <p class="guideline">4️⃣ ${t("guideReading")}</p>
+    <p class="note" style="font-weight:600">${t("guideMotto")}</p>
+  </div>
   <div class="grid2">
     <div class="tile" onclick="setView('practice')">
       <div class="big">${t("navPractice")}</div>
@@ -1176,7 +1193,12 @@ function renderPractice(){
     <span class="badge">${examLabel(q.exam)} · Q${q.n} · ${catName(q.cat)}</span>
     ${q.scenario?`<div class="scenario">${esc(q.scenario)} <button class="spk" onclick="speakPracticeScenario()" title="🔊 PT">🔊</button></div>`:""}
     <div class="qtext">${esc(q.q)}</div>
-    <div class="rowbtns" style="margin:8px 0 2px"><button class="ghost" onclick="speakPracticeQ()">${t("listenQ")}</button></div>
+    <div class="rowbtns" style="margin:8px 0 2px">
+      <button class="ghost" onclick="speakPracticeQ()">${t("listenQ")}</button>
+      <button class="ghost" onclick="practice.hintLvl=practice.hintLvl?0:1;renderPractice()">${practice.hintLvl?t("hintHide"):t("hintShow")}</button>
+      ${practice.hintLvl>0&&practice.hintLvl<3?`<button class="ghost" onclick="practice.hintLvl++;renderPractice()">🔎 ${t("hintDeeper")}</button>`:""}
+    </div>
+    ${practice.hintLvl?`<div class="hintbox">${hintLevels(q,practice.hintLvl)}</div>`:""}
     <div class="opts">
       ${["A","B","C","D"].map(L=>{
         let cls="opt";
@@ -1188,11 +1210,6 @@ function renderPractice(){
         return `<button class="${cls}" ${done?"disabled":""} onclick="answerPractice('${L}')"><span class="letter">${L})</span><span>${esc(q.opts[L])}</span></button>`;
       }).join("")}
     </div>
-    <div class="rowbtns" style="margin-top:10px">
-      <button class="ghost" onclick="practice.hintLvl=practice.hintLvl?0:1;renderPractice()">${practice.hintLvl?t("hintHide"):t("hintShow")}</button>
-      ${practice.hintLvl>0&&practice.hintLvl<3?`<button class="ghost" onclick="practice.hintLvl++;renderPractice()">🔎 ${t("hintDeeper")}</button>`:""}
-    </div>
-    ${practice.hintLvl?`<div class="hintbox">${hintLevels(q,practice.hintLvl)}</div>`:""}
     ${done?renderFeedback(q):""}
   </div>
   ${done?renderTutor(q):""}
@@ -1293,18 +1310,18 @@ function renderExam(){
     <span class="badge">${examLabel(q.exam)} · Q${q.n} · ${catName(q.cat)}</span>
     ${q.scenario?`<div class="scenario">${esc(q.scenario)} <button class="spk" onclick="speakExamScenario()" title="🔊 PT">🔊</button></div>`:""}
     <div class="qtext">${esc(q.q)}</div>
-    <div class="rowbtns" style="margin:8px 0 2px"><button class="ghost" onclick="speakExamQ()">${t("listenQ")}</button></div>
+    <div class="rowbtns" style="margin:8px 0 2px">
+      <button class="ghost" onclick="speakExamQ()">${t("listenQ")}</button>
+      <button class="ghost" onclick="exam.hintLvl=exam.hintLvl?0:1;renderExam()">${exam.hintLvl?t("hintHide"):t("hintShow")}</button>
+      ${exam.hintLvl>0&&exam.hintLvl<3?`<button class="ghost" onclick="exam.hintLvl++;renderExam()">🔎 ${t("hintDeeper")}</button>`:""}
+    </div>
+    ${exam.hintLvl?`<div class="hintbox">${hintLevels(q,exam.hintLvl)}</div>`:""}
     <div class="opts">
       ${["A","B","C","D"].map(L=>{
         const s=exam.answers[uid(q)]===L;
         return `<button class="opt" style="${s?'border-color:var(--navy);background:#EEF3F9;font-weight:600':''}" onclick="pickExam('${uid(q)}','${L}')"><span class="letter">${L})</span><span>${esc(q.opts[L])}</span></button>`;
       }).join("")}
     </div>
-    <div class="rowbtns" style="margin-top:10px">
-      <button class="ghost" onclick="exam.hintLvl=exam.hintLvl?0:1;renderExam()">${exam.hintLvl?t("hintHide"):t("hintShow")}</button>
-      ${exam.hintLvl>0&&exam.hintLvl<3?`<button class="ghost" onclick="exam.hintLvl++;renderExam()">🔎 ${t("hintDeeper")}</button>`:""}
-    </div>
-    ${exam.hintLvl?`<div class="hintbox">${hintLevels(q,exam.hintLvl)}</div>`:""}
     <div class="rowbtns">
       <button class="ghost" ${exam.idx===0?"disabled":""} onclick="exam.idx--;exam.hintLvl=0;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)">${t("prev")}</button>
       <button class="primary" ${exam.idx>=exam.qs.length-1?"disabled":""} onclick="exam.idx++;exam.hintLvl=0;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)">${t("next")}</button>
@@ -1762,6 +1779,7 @@ function renderDrill(){
     ${done?`
       <span class="stamp ${navd.picked===navd.correct?'ok':'no'}">${navd.picked===navd.correct?t("drillRight"):t("drillWrong")} · ${navd.times[navd.times.length-1].toFixed(1)}s</span>
       <div class="hintbox">${hintFor(q)}</div>
+      <div class="ansreveal">✅ <b>${t("drillAnswer")}:</b><br>${q.ans.map(L=>`<b>${L})</b> ${esc(q.opts[L])}`).join("<br>")}</div>
       <div><span class="cite">${t("source")}: ${esc(q.cite)}</span></div>
       <div class="rowbtns"><button class="primary" onclick="drillAdvance()">${t("next")}</button></div>
     `:""}

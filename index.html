@@ -1085,8 +1085,17 @@ guideExam:{pt:"<b>SIMULADO</b> mede: prova completa com cronômetro no ritmo ofi
 guideCivics:{pt:"<b>CIVICS 🇺🇸</b> é a cidadania: as 128 perguntas oficiais em cartas inteligentes que voltam na hora certa de revisar. 15 min por dia bastam.",en:"<b>CIVICS 🇺🇸</b> is citizenship: the 128 official questions as smart flashcards that return right when it's time to review. 15 min a day is enough.",es:"<b>CIVICS 🇺🇸</b> es la ciudadanía: las 128 preguntas oficiales en tarjetas inteligentes que vuelven justo cuando toca repasar. 15 min al día bastan."},
 guideReading:{pt:"<b>LEITURA 🔊</b> treina o ouvido: frases faladas em inglês → português → espanhol, com modo lento. Ouça e repita em voz alta.",en:"<b>READING 🔊</b> trains your ear: sentences spoken in English → Portuguese → Spanish, with slow mode. Listen and repeat out loud.",es:"<b>LECTURA 🔊</b> entrena el oído: frases habladas en inglés → portugués → español, con modo lento. Escucha y repite en voz alta."},
 guideMotto:{pt:"Resumo: Praticar ensina · Simulado mede · Civics é a cidadania · Leitura treina o ouvido.",en:"In short: Practice teaches · Mock Exam measures · Civics is citizenship · Reading trains your ear.",es:"En resumen: Practicar enseña · Simulacro mide · Civics es la ciudadanía · Lectura entrena el oído."},
-civTest:{pt:"Teste — simulado da entrevista",en:"Test — interview simulation",es:"Examen — simulacro de entrevista"},
-civTestSub:{pt:"20 perguntas sorteadas, escolha a resposta certa. Na entrevista real de 2025 são até 20 perguntas e você precisa de 12 corretas.",en:"20 random questions, pick the right answer. In the real 2025 interview you get up to 20 questions and need 12 correct.",es:"20 preguntas al azar, elige la respuesta correcta. En la entrevista real de 2025 son hasta 20 preguntas y necesitas 12 correctas."},
+tutorOffline:{pt:"📚 Fonte oficial desta questão: {CITE}\n\nA prova é de livro aberto — abra a fonte acima, a resposta mora ali. Treinar esse caminho é exatamente o que a prova cobra.\n\n🤖 O Tutor IA com explicações personalizadas chega em breve, na versão com login.",en:"📚 Official source for this question: {CITE}\n\nThe exam is open book — open the source above, the answer lives there. Training that path is exactly what the exam demands.\n\n🤖 The AI Tutor with personalized explanations is coming soon, in the login version.",es:"📚 Fuente oficial de esta pregunta: {CITE}\n\nEl examen es a libro abierto — abre la fuente de arriba, la respuesta vive ahí. Entrenar ese camino es exactamente lo que exige el examen.\n\n🤖 El Tutor IA con explicaciones personalizadas llega pronto, en la versión con login."},
+civTutorOffline:{pt:"📚 As respostas oficiais estão logo acima — memorize uma delas e treine dizê-la em voz alta em inglês (use o 🔊).\n\n🤖 O Tutor IA com dicas de memorização chega em breve, na versão com login.",en:"📚 The official answers are right above — memorize one of them and practice saying it out loud in English (use the 🔊).\n\n🤖 The AI Tutor with memory tips is coming soon, in the login version.",es:"📚 Las respuestas oficiales están justo arriba — memoriza una y practica decirla en voz alta en inglés (usa el 🔊).\n\n🤖 El Tutor IA con consejos de memorización llega pronto, en la versión con login."},
+civTest:{pt:"Teste — todas as 128",en:"Test — all 128",es:"Examen — las 128"},
+civTestSub:{pt:"Percorre as 128 perguntas oficiais em ordem aleatória, com 4 alternativas. Seu avanço fica salvo — pare e continue quando quiser. As que você erra voltam com mais frequência até grudarem.",en:"Goes through all 128 official questions in random order, with 4 choices. Your progress is saved — stop and resume anytime. The ones you miss come back more often until they stick.",es:"Recorre las 128 preguntas oficiales en orden aleatorio, con 4 opciones. Tu avance queda guardado — para y continúa cuando quieras. Las que fallas vuelven con más frecuencia hasta que se peguen."},
+civTestResume:{pt:"Continuar teste",en:"Resume test",es:"Continuar examen"},
+civTestReset:{pt:"↺ Zerar",en:"↺ Reset",es:"↺ Reiniciar"},
+civTestResetC:{pt:"Zerar o teste e começar uma rodada nova? Seu histórico de erros continua valendo para a frequência.",en:"Reset the test and start a new round? Your error history still counts for frequency.",es:"¿Reiniciar el examen y empezar una ronda nueva? Tu historial de errores sigue contando para la frecuencia."},
+civTestRound:{pt:"Rodada completa!",en:"Round complete!",es:"¡Ronda completa!"},
+civTestDoneMsg:{pt:"Na entrevista real são até 20 perguntas e 12 certas aprovam — a sua taxa de acerto acima diz se você está pronto. As erradas já estão na fila do Estudar e voltarão com mais frequência na próxima rodada.",en:"In the real interview you get up to 20 questions and 12 correct pass — your accuracy above tells you if you are ready. The missed ones are queued in Study and will come back more often next round.",es:"En la entrevista real son hasta 20 preguntas y 12 correctas aprueban — tu tasa de acierto de arriba dice si estás listo. Las falladas ya están en la fila de Estudiar y volverán con más frecuencia en la próxima ronda."},
+civTestWeak:{pt:"Suas perguntas mais erradas (histórico)",en:"Your most-missed questions (history)",es:"Tus preguntas más falladas (historial)"},
+civTestNew:{pt:"Nova rodada",en:"New round",es:"Nueva ronda"},
 civTestPick:{pt:"Escolha a resposta correta:",en:"Pick the correct answer:",es:"Elige la respuesta correcta:"},
 civTestNext:{pt:"Próxima →",en:"Next →",es:"Siguiente →"},
 civTestSee:{pt:"Ver resultado",en:"See result",es:"Ver resultado"},
@@ -1175,7 +1184,7 @@ function renderHome(){
   </div>
   <div class="card">
     <p class="note">${t("homeNote")}</p>
-    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v18</p>
+    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v20</p>
   </div>`;
 }
 
@@ -1361,11 +1370,13 @@ async function askTutor(preset){
       method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:sys,messages:msgs})
     });
+    if(!r.ok)throw new Error("api "+r.status);
     const data=await r.json();
-    const out=(data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n")||"Não consegui gerar a explicação. Tente novamente.";
+    const out=(data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n");
+    if(!out)throw new Error("empty");
     practice.chat.push({role:"ai",text:out});
   }catch(e){
-    practice.chat.push({role:"ai",text:"Erro ao consultar o tutor. Verifique a conexão e tente novamente."});
+    practice.chat.push({role:"ai",text:t("tutorOffline").replace("{CITE}",q.cite||"—")});
   }
   practice.loading=false;renderPractice();
   const box=$("tutorbox");if(box)box.scrollIntoView({behavior:"smooth",block:"end"});
@@ -1559,38 +1570,63 @@ function civGrade(g){ // 0=errei 1=difícil 2=bom 3=fácil
   stSet("civdeck",civ.deck);
   renderCivics();window.scrollTo(0,0);
 }
-function civStartTest(){
-  const pool=shuffle(CIVICS.slice()).slice(0,20);
-  const qs=pool.map(c=>{
-    const correct=c.a[Math.floor(Math.random()*c.a.length)];
-    // distratores: respostas de outras cartas, preferindo a mesma categoria, sem repetir
-    const others=shuffle(CIVICS.filter(x=>x.n!==c.n&&x.c===c.c).flatMap(x=>x.a)
-      .concat(shuffle(CIVICS.filter(x=>x.n!==c.n&&x.c!==c.c).flatMap(x=>x.a))));
-    const seen=new Set([correct.toLowerCase()]);const dis=[];
-    for(const o of others){const k=o.toLowerCase();if(!seen.has(k)){seen.add(k);dis.push(o);if(dis.length===3)break;}}
-    const opts=shuffle([correct].concat(dis));
-    return {card:c,opts,correctIdx:opts.indexOf(correct)};
-  });
-  civ.test={qs,pos:0,score:0,picked:null,missed:[]};
-  civ.mode="test";renderCivics();window.scrollTo(0,0);
+function civTestOpts(c){ // 1 oficial + 3 distratores (mesma categoria primeiro), sem repetir
+  const correct=c.a[Math.floor(Math.random()*c.a.length)];
+  const others=shuffle(CIVICS.filter(x=>x.n!==c.n&&x.c===c.c).flatMap(x=>x.a)
+    .concat(shuffle(CIVICS.filter(x=>x.n!==c.n&&x.c!==c.c).flatMap(x=>x.a))));
+  const seen=new Set([correct.toLowerCase()]);const dis=[];
+  for(const o of others){const k=o.toLowerCase();if(!seen.has(k)){seen.add(k);dis.push(o);if(dis.length===3)break;}}
+  const opts=shuffle([correct].concat(dis));
+  return {opts,correctIdx:opts.indexOf(correct)};
+}
+function civTestSetCur(){
+  const T=civ.test,n=T.queue[T.pos],c=CIVICS.find(x=>x.n===n);
+  const o=civTestOpts(c);T.cur={n,opts:o.opts,correctIdx:o.correctIdx};
+}
+function civTestSave(){stSet("civtest",civ.test);}
+function civStartTest(fresh){
+  const saved=fresh?null:stGet("civtest");
+  if(saved&&saved.queue&&saved.pos<saved.queue.length&&saved.cur){ // retoma exatamente de onde parou
+    civ.test=saved;civ.mode="test";renderCivics();window.scrollTo(0,0);return;
+  }
+  const stats=stGet("civtstats")||{};
+  // fila nova: as 128 embaralhadas; histórico de mais erro que acerto = aparição extra na rodada
+  let queue=shuffle(CIVICS.map(c=>c.n));
+  CIVICS.forEach(c=>{const s=stats[c.n];if(s&&s.w>s.r)queue.splice(Math.floor(Math.random()*(queue.length+1)),0,c.n);});
+  civ.test={queue,pos:0,score:0,picked:null,cur:null};
+  civTestSetCur();
+  civ.mode="test";civTestSave();renderCivics();window.scrollTo(0,0);
 }
 function civTestPick(i){
-  const T=civ.test;if(T.picked!==null)return;
-  const q=T.qs[T.pos];T.picked=i;
-  if(i===q.correctIdx){T.score++;}
+  const T=civ.test;if(T.picked!==null&&T.picked!==undefined)return;
+  T.picked=i;
+  const n=T.cur.n;const stats=stGet("civtstats")||{};
+  if(!stats[n])stats[n]={w:0,r:0};
+  if(i===T.cur.correctIdx){T.score++;stats[n].r++;}
   else{
-    T.missed.push(q.card);
-    const s=civState(q.card.n);s.seen=true;s.due=Date.now();stSet("civdeck",civ.deck); // erro entra na fila do Estudar
+    stats[n].w++;
+    const s=civState(n);s.seen=true;s.due=Date.now();stSet("civdeck",civ.deck); // erro entra na fila do Estudar
+    // errou: a pergunta volta daqui a 4-8 posições (máx. 2 reaparições futuras)
+    const future=T.queue.slice(T.pos+1).filter(x=>x===n).length;
+    if(future<2){const at=Math.min(T.queue.length,T.pos+4+Math.floor(Math.random()*5));T.queue.splice(at,0,n);}
   }
-  renderCivics();
+  stSet("civtstats",stats);civTestSave();renderCivics();
 }
 function civTestNext(){
-  civ.test.pos++;civ.test.picked=null;renderCivics();window.scrollTo(0,0);
+  const T=civ.test;T.pos++;T.picked=null;
+  if(T.pos<T.queue.length){civTestSetCur();civTestSave();}
+  else{stSet("civtest",null);} // rodada fechada: limpa o salvo, mantém o histórico
+  renderCivics();window.scrollTo(0,0);
+}
+function civTestReset(){
+  if(!confirm(t("civTestResetC")))return;
+  stSet("civtest",null);civStartTest(true);
 }
 function renderCivics(){
   // tela inicial do módulo
   if(civ.mode===null){
     const due=civDueCards().length,fresh=civNewCards().length,mast=civMasteredCount(),ready=civReadiness();
+    const tsav=stGet("civtest");const tOn=tsav&&tsav.queue&&tsav.pos<tsav.queue.length;
     app().innerHTML=`
     <div class="card">
       <span class="eyebrow">USCIS · M-1778 (09/25) · ${t("civOral")}</span>
@@ -1601,7 +1637,7 @@ function renderCivics(){
       <p class="note">${t("civCounts").replace("{D}",due).replace("{N}",fresh).replace("{M}",mast)}</p>
       <div class="rowbtns">
         <button class="primary" onclick="civStartSession('all')">▶ ${t("civStudy")}</button>
-        <button class="primary" style="background:var(--stamp)" onclick="civStartTest()">📝 ${t("civTest")}</button>
+        <button class="primary" style="background:var(--stamp)" onclick="civStartTest()">📝 ${tOn?t("civTestResume")+" ("+tsav.pos+"/"+tsav.queue.length+")":t("civTest")}</button>
         <button class="ghost" onclick="civStartSession('star')">⭐ ${t("civStar")}</button>
       </div>
       <p class="note">${t("civTestSub")}</p>
@@ -1618,25 +1654,27 @@ function renderCivics(){
     </div>`;
     return;
   }
-  // TESTE (simulado da entrevista)
+  // TESTE maratona (128 perguntas, salvo, peso por erro)
   if(civ.mode==="test"){
     const T=civ.test;
-    if(T.pos>=T.qs.length){
-      const pass=T.score>=12;
+    if(T.pos>=T.queue.length){
+      const pct=T.queue.length?Math.round(T.score*100/T.queue.length):0;
+      const stats=stGet("civtstats")||{};
+      const weak=CIVICS.filter(c=>(stats[c.n]||{}).w>0).sort((a,b)=>(stats[b.n].w-stats[b.n].r)-(stats[a.n].w-stats[a.n].r)).slice(0,8);
       app().innerHTML=`
       <div class="card" style="text-align:center">
-        <span class="eyebrow">${t("civTestResult")}</span>
-        <div class="result-big ${pass?'pass':'fail'}">${T.score} / ${T.qs.length}</div>
-        <p class="lead">${pass?t("civTestPass"):t("civTestFail")}</p>
+        <span class="eyebrow">${t("civTestRound")}</span>
+        <div class="result-big ${pct>=60?'pass':'fail'}">${T.score} / ${T.queue.length} · ${pct}%</div>
+        <p class="lead">${t("civTestDoneMsg")}</p>
         <div class="rowbtns" style="justify-content:center">
-          <button class="primary" onclick="civStartTest()">📝 ${t("civAgainSession")}</button>
+          <button class="primary" onclick="civStartTest(true)">📝 ${t("civTestNew")}</button>
           <button class="ghost" onclick="civ.mode=null;civ.test=null;renderCivics()">${t("back")}</button>
         </div>
       </div>
-      ${T.missed.length?`<div class="card">
-        <h3>${t("civTestMissed")} (${T.missed.length})</h3>
-        ${T.missed.map(c=>`<div class="civmini" style="margin-top:10px">
-          <span class="badge">Q${c.n}</span>
+      ${weak.length?`<div class="card">
+        <h3>${t("civTestWeak")}</h3>
+        ${weak.map(c=>`<div class="civmini" style="margin-top:10px">
+          <span class="badge">Q${c.n} · ✗${stats[c.n].w} ✓${stats[c.n].r}</span>
           <div class="qtext" style="font-size:15px">${esc(c.q)}</div>
           ${civTrQ(c.n)?`<div class="flashtr">${esc(civTrQ(c.n))}</div>`:""}
           <ul class="civans">${c.a.map(a=>`<li>${esc(a)}</li>`).join("")}</ul>
@@ -1645,11 +1683,12 @@ function renderCivics(){
       <div class="card"><p class="note">${t("civTestNote")}</p></div>`;
       return;
     }
-    const q=T.qs[T.pos],c=q.card,done=T.picked!==null;
+    const c=CIVICS.find(x=>x.n===T.cur.n),done=T.picked!==null&&T.picked!==undefined;
     app().innerHTML=`
     <div class="topbar">
-      <button class="ghost" onclick="civ.mode=null;civ.test=null;renderCivics()">${t("back")}</button>
-      <span class="progress">${t("qWord")} ${T.pos+1} ${t("ofWord")} ${T.qs.length} · ✓ ${T.score}</span>
+      <button class="ghost" onclick="civ.mode=null;renderCivics()">${t("back")}</button>
+      <span class="progress">${t("qWord")} ${T.pos+1} ${t("ofWord")} ${T.queue.length} · ✓ ${T.score}</span>
+      <button class="ghost" onclick="civTestReset()" title="${t("civTestReset")}">${t("civTestReset")}</button>
     </div>
     <div class="card">
       <span class="badge">${civCatName(c.c)} · Q${c.n}${c.s?" ⭐ 65/20":""}</span>
@@ -1657,16 +1696,16 @@ function renderCivics(){
       ${civTrQ(c.n)?`<div class="flashtr">${esc(civTrQ(c.n))}</div>`:""}
       <p class="note" style="margin-top:10px">${t("civTestPick")}</p>
       <div class="opts">
-      ${q.opts.map((o,i)=>{
+      ${T.cur.opts.map((o,i)=>{
         let cls="opt";
-        if(done){if(i===q.correctIdx)cls="opt correct";else if(i===T.picked)cls="opt wrong";else cls="opt dim";}
+        if(done){if(i===T.cur.correctIdx)cls="opt correct";else if(i===T.picked)cls="opt wrong";else cls="opt dim";}
         return `<button class="${cls}" ${done?"disabled":""} onclick="civTestPick(${i})"><span class="letter">${String.fromCharCode(65+i)})</span><span>${esc(o)}</span></button>`;
       }).join("")}
       </div>
       ${done?`
-        <p class="lead" style="margin-top:12px">${T.picked===q.correctIdx?t("civTestGood"):t("civTestBad")}</p>
+        <p class="lead" style="margin-top:12px">${T.picked===T.cur.correctIdx?t("civTestGood"):t("civTestBad")}</p>
         ${c.d?`<p class="dynwarn">⚠️ ${t("civDynWarn")}</p>`:""}
-        <div class="rowbtns"><button class="primary" onclick="civTestNext()">${T.pos+1>=T.qs.length?t("civTestSee"):t("civTestNext")}</button></div>
+        <div class="rowbtns"><button class="primary" onclick="civTestNext()">${T.pos+1>=T.queue.length?t("civTestSee"):t("civTestNext")}</button></div>
       `:""}
     </div>`;
     return;
@@ -1741,9 +1780,12 @@ async function civExplain(){
   try{
     const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:sys,messages:[{role:"user",content:user}]})});
+    if(!r.ok)throw new Error("api "+r.status);
     const data=await r.json();
-    civ.chat=(data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n")||"—";
-  }catch(e){civ.chat=t("civTutorErr");}
+    const out=(data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n");
+    if(!out)throw new Error("empty");
+    civ.chat=out;
+  }catch(e){civ.chat=t("civTutorOffline");}
   civ.loading=false;renderCivics();
 }
 

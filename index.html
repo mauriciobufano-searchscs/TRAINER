@@ -1045,7 +1045,7 @@ civTutorErr:{pt:"Tutor indisponível agora. Tente de novo em instantes.",en:"Tut
 navReading:{pt:"Leitura 🔊",en:"Reading 🔊",es:"Lectura 🔊"},
 readEyebrow:{pt:"Ouvir e repetir · vozes do dispositivo",en:"Listen and repeat · device voices",es:"Escuchar y repetir · voces del dispositivo"},
 readTitle:{pt:"Módulo de Leitura",en:"Reading Module",es:"Módulo de Lectura"},
-readLead:{pt:"Aperte ▶ e o app fala a frase nas três línguas em sequência: inglês → português → espanhol. Toque em qualquer linha para ouvir só aquela língua. Repita em voz alta depois do áudio — é assim que a pronúncia gruda.",en:"Press ▶ and the app speaks the sentence in the three languages in sequence: English → Portuguese → Spanish. Tap any line to hear only that language. Repeat out loud after the audio — that is how pronunciation sticks.",es:"Presiona ▶ y la app dice la frase en los tres idiomas en secuencia: inglés → portugués → español. Toca cualquier línea para escuchar solo ese idioma. Repite en voz alta después del audio — así se pega la pronunciación."},
+readLead:{pt:"Aperte ▶: o app fala a frase em inglês e depois em português. Toque em qualquer linha para ouvir só aquela língua. Repita em voz alta depois do áudio — é assim que a pronúncia gruda.",en:"Press ▶: the app speaks the sentence in English. Tap the line to hear it again. Repeat out loud after the audio — that is how pronunciation sticks.",es:"Presiona ▶: la app dice la frase en inglés y después en español. Toca cualquier línea para escuchar solo ese idioma. Repite en voz alta después del audio — así se pega la pronunciación."},
 readSlow:{pt:"Modo lento",en:"Slow mode",es:"Modo lento"},
 readStop:{pt:"Parar",en:"Stop",es:"Detener"},
 readNote:{pt:"Frases de treino no estilo do teste de leitura do USCIS (no teste oficial você lê UMA frase corretamente, em inglês). As vozes vêm do seu celular/computador — a qualidade varia por aparelho.",en:"Practice sentences in the style of the USCIS reading test (in the official test you read ONE sentence correctly, in English). Voices come from your phone/computer — quality varies by device.",es:"Frases de práctica al estilo del examen de lectura del USCIS (en el examen oficial lees UNA frase correctamente, en inglés). Las voces vienen de tu teléfono/computadora — la calidad varía según el dispositivo."},
@@ -1085,6 +1085,8 @@ guideExam:{pt:"<b>SIMULADO</b> mede: prova completa com cronômetro no ritmo ofi
 guideCivics:{pt:"<b>CIVICS 🇺🇸</b> é a cidadania: as 128 perguntas oficiais em cartas inteligentes que voltam na hora certa de revisar. 15 min por dia bastam.",en:"<b>CIVICS 🇺🇸</b> is citizenship: the 128 official questions as smart flashcards that return right when it's time to review. 15 min a day is enough.",es:"<b>CIVICS 🇺🇸</b> es la ciudadanía: las 128 preguntas oficiales en tarjetas inteligentes que vuelven justo cuando toca repasar. 15 min al día bastan."},
 guideReading:{pt:"<b>LEITURA 🔊</b> treina o ouvido: frases faladas em inglês → português → espanhol, com modo lento. Ouça e repita em voz alta.",en:"<b>READING 🔊</b> trains your ear: sentences spoken in English → Portuguese → Spanish, with slow mode. Listen and repeat out loud.",es:"<b>LECTURA 🔊</b> entrena el oído: frases habladas en inglés → portugués → español, con modo lento. Escucha y repite en voz alta."},
 guideMotto:{pt:"Resumo: Praticar ensina · Simulado mede · Civics é a cidadania · Leitura treina o ouvido.",en:"In short: Practice teaches · Mock Exam measures · Civics is citizenship · Reading trains your ear.",es:"En resumen: Practicar enseña · Simulacro mide · Civics es la ciudadanía · Lectura entrena el oído."},
+htsusTitle:{pt:"Guia HTSUS",en:"HTSUS Guide",es:"Guía HTSUS"},
+htsusTileSub:{pt:"Como achar a classificação no livro sem se perder: o método em 5 passos, as GRIs em uma linha cada e as armadilhas clássicas de prova.",en:"How to find the classification in the book without getting lost: the 5-step method, each GRI in one line, and the classic exam traps.",es:"Cómo encontrar la clasificación en el libro sin perderse: el método en 5 pasos, las GRIs en una línea y las trampas clásicas del examen."},
 voiceTip:{pt:"⚠️ Este aparelho não tem voz em português e/ou espanhol instalada — nesses idiomas o áudio pode sair mudo ou com sotaque inglês. iPhone: Ajustes → Acessibilidade → Conteúdo Falado → Vozes → adicionar o idioma. Android: Configurações → Sistema → Conversão de texto em voz → instalar idiomas.",en:"⚠️ This device does not have Portuguese and/or Spanish voices installed — audio in those languages may be silent or spoken with an English accent. iPhone: Settings → Accessibility → Spoken Content → Voices → add the language. Android: Settings → System → Text-to-speech → install languages.",es:"⚠️ Este dispositivo no tiene voces en portugués y/o español instaladas — el audio en esos idiomas puede salir mudo o con acento inglés. iPhone: Ajustes → Accesibilidad → Contenido hablado → Voces → agregar el idioma. Android: Ajustes → Sistema → Texto a voz → instalar idiomas."}
 };
 const t=k=>(T[k]&&(T[k][lang]||T[k].pt))||k;
@@ -1143,6 +1145,10 @@ function renderHome(){
       <div class="big">🔊 ${t("readTitle")}</div>
       <small>${t("readLead")}</small>
     </div>
+    <div class="tile" onclick="setView('htsus')" style="grid-column:1/-1;border-left:4px solid var(--navy2)">
+      <div class="big">📖 ${t("htsusTitle")}</div>
+      <small>${t("htsusTileSub")}</small>
+    </div>
   </div>
   <div class="card">
     <h3>📦 ${t("catalogTitle")}</h3>
@@ -1157,6 +1163,7 @@ function renderHome(){
   </div>
   <div class="card">
     <p class="note">${t("homeNote")}</p>
+    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v17</p>
   </div>`;
 }
 
@@ -1730,9 +1737,12 @@ function ttsSpeak(text,lc,onend){
   speechSynthesis.speak(u);
 }
 function ttsOne(i,lc){ttsStop();const s=curReading()[i];tts.playing=i;renderReading();ttsSpeak(s[lc],lc,()=>{tts.playing=-1;renderReading();});}
-function ttsAll(i){ // fala EN → PT → ES em sequência
+function ttsAll(i){ // fala EN + tradução do idioma do app (EN puro se o app estiver em inglês)
   ttsStop();const s=curReading()[i];tts.playing=i;renderReading();
-  ttsSpeak(s.en,"en",()=>ttsSpeak(s.pt,"pt",()=>ttsSpeak(s.es,"es",()=>{tts.playing=-1;renderReading();})));
+  const done=()=>{tts.playing=-1;renderReading();};
+  if(lang==="pt")ttsSpeak(s.en,"en",()=>ttsSpeak(s.pt,"pt",done));
+  else if(lang==="es")ttsSpeak(s.en,"en",()=>ttsSpeak(s.es,"es",done));
+  else ttsSpeak(s.en,"en",done);
 }
 function ttsToggleRead(parts,lc){
   if(!ttsSupported())return;
@@ -1772,12 +1782,143 @@ function renderReading(){
     <button class="playbig" onclick="ttsAll(${i})" title="EN → PT → ES">${tts.playing===i?"🔊":"▶"}</button>
     <div class="readtexts">
       <div class="readen" onclick="ttsOne(${i},'en')">🇺🇸 ${esc(s.en)}</div>
-      <div class="readtr" onclick="ttsOne(${i},'pt')">🇧🇷 ${esc(s.pt)}</div>
-      <div class="readtr" onclick="ttsOne(${i},'es')">🇪🇸 ${esc(s.es)}</div>
+      ${lang==='pt'?`<div class="readtr" onclick="ttsOne(${i},'pt')">🇧🇷 ${esc(s.pt)}</div>`:""}
+      ${lang==='es'?`<div class="readtr" onclick="ttsOne(${i},'es')">🇪🇸 ${esc(s.es)}</div>`:""}
     </div>
   </div>`).join("")}`;
 }
 ttsInit();
+
+// ---------- GUIA HTSUS (método de consulta resumido) ----------
+const HTSUS_GUIDE={
+pt:`
+<div class="card">
+  <span class="eyebrow">Método antes de decoreba · prova de livro aberto</span>
+  <h2>📖 Guia HTSUS — como achar a classificação sem se perder</h2>
+  <p class="lead">O HTSUS tem milhares de páginas, mas a consulta certa leva minutos. O segredo é seguir sempre o mesmo caminho — o mesmo em toda questão de classificação.</p>
+</div>
+<div class="card">
+  <h3>🗺️ O mapa do livro</h3>
+  <p class="guideline">O HTSUS é um funil: <b>22 Seções → 99 Capítulos → posição (4 dígitos) → subposição (6 dígitos) → linha americana (8 e 10 dígitos)</b>.</p>
+  <p class="guideline">Regra de bolso da ordem: matéria-prima vem no começo, produto acabado vem no fim (animais vivos no Cap. 1, máquinas no 84, obras de arte no 97).</p>
+  <p class="guideline">Peças de apoio: <b>General Notes</b> (FTAs, USMCA e programas especiais), <b>Notas de Seção e de Capítulo</b> (definições e EXCLUSÕES), <b>Capítulo 98</b> (regimes especiais dos EUA: 9801 retorno de mercadoria americana, 9802 reparo/montagem) e <b>Capítulo 99</b> (medidas temporárias: Seção 301, salvaguardas).</p>
+</div>
+<div class="card" style="border-left:4px solid var(--gold)">
+  <h3>🧭 O método em 5 passos</h3>
+  <p class="guideline">1️⃣ <b>Índice alfabético</b>: procure a mercadoria pelo nome e anote os capítulos candidatos.</p>
+  <p class="guideline">2️⃣ <b>Leia as Notas da Seção e do Capítulo ANTES de classificar</b>: elas definem termos e EXPULSAM mercadorias ("this chapter does not cover…"). A pegadinha da prova mora aqui.</p>
+  <p class="guideline">3️⃣ <b>GRI 1</b>: o texto da posição + as notas decidem. Se resolver aqui, acabou — não invente regra extra.</p>
+  <p class="guideline">4️⃣ <b>Desça um nível por vez</b>: escolha a posição (4 díg.) e só então compare as subposições irmãs do mesmo nível (GRI 6), até chegar aos 10 dígitos.</p>
+  <p class="guideline">5️⃣ <b>Feche na coluna de duty</b>: General (NTR), Special (FTAs — confirme o programa na General Note) e Column 2. Cheque se o Cap. 99 adiciona tarifa (ex.: Seção 301 para China).</p>
+</div>
+<div class="card">
+  <h3>⚖️ As GRIs em uma linha cada</h3>
+  <p class="guideline"><b>GRI 1</b> — Texto da posição e notas mandam. Resolve a maioria dos casos.</p>
+  <p class="guideline"><b>GRI 2(a)</b> — Incompleto ou desmontado com o caráter essencial = classifica como completo.</p>
+  <p class="guideline"><b>GRI 2(b)</b> — Misturas de materiais: a referência a um material inclui suas misturas → decide pela GRI 3.</p>
+  <p class="guideline"><b>GRI 3(a)</b> — Descrição mais específica vence a genérica.</p>
+  <p class="guideline"><b>GRI 3(b)</b> — Misturas, compostos e SETS de varejo: classifica pelo componente que dá o caráter essencial.</p>
+  <p class="guideline"><b>GRI 3(c)</b> — Empate persistindo: vence a última posição na ordem numérica.</p>
+  <p class="guideline"><b>GRI 4</b> — Não há posição? Use a mais parecida (raríssimo na prática).</p>
+  <p class="guideline"><b>GRI 5</b> — Estojos e embalagens acompanham o produto (salvo se reutilizáveis por si).</p>
+  <p class="guideline"><b>GRI 6</b> — Tudo acima vale de novo no nível da subposição, comparando só irmãs do mesmo nível.</p>
+  <p class="guideline"><b>Additional U.S. Rules</b> — Regras americanas para "parts", "parts and accessories" e uso principal (principal use).</p>
+</div>
+<div class="card" style="border-left:4px solid var(--stamp)">
+  <h3>⚠️ Armadilhas clássicas de prova</h3>
+  <p class="guideline">• A nota do capítulo <b>exclui</b> a mercadoria → o capítulo "óbvio" está errado. Leia as notas primeiro.</p>
+  <p class="guideline">• Set para venda no varejo → GRI 3(b), caráter essencial — não classifique item por item.</p>
+  <p class="guideline">• Produto desmontado no contêiner → GRI 2(a), classifica como o produto completo.</p>
+  <p class="guideline">• Posição que nomeia a mercadoria (eo nomine) vence "other" — específico bate genérico.</p>
+  <p class="guideline">• Alíquota Special exige confirmar o programa na General Note — não confie só na sigla entre parênteses.</p>
+  <p class="guideline">• Leitura rápida de código: 2 dígitos = capítulo · 4 = posição · 6 = mundial (HS) · 8 e 10 = só os EUA.</p>
+</div>`,
+en:`
+<div class="card">
+  <span class="eyebrow">Method over memorization · open-book exam</span>
+  <h2>📖 HTSUS Guide — how to find the classification without getting lost</h2>
+  <p class="lead">The HTSUS has thousands of pages, but the right lookup takes minutes. The secret is following the same path every time — the same one in every classification question.</p>
+</div>
+<div class="card">
+  <h3>🗺️ The map of the book</h3>
+  <p class="guideline">The HTSUS is a funnel: <b>22 Sections → 99 Chapters → heading (4 digits) → subheading (6 digits) → U.S. line (8 and 10 digits)</b>.</p>
+  <p class="guideline">Rule of thumb for the order: raw materials come first, finished goods come last (live animals in Ch. 1, machinery in 84, works of art in 97).</p>
+  <p class="guideline">Supporting pieces: <b>General Notes</b> (FTAs, USMCA and special programs), <b>Section and Chapter Notes</b> (definitions and EXCLUSIONS), <b>Chapter 98</b> (U.S. special regimes: 9801 American goods returned, 9802 repair/assembly) and <b>Chapter 99</b> (temporary measures: Section 301, safeguards).</p>
+</div>
+<div class="card" style="border-left:4px solid var(--gold)">
+  <h3>🧭 The 5-step method</h3>
+  <p class="guideline">1️⃣ <b>Alphabetical index</b>: look up the merchandise by name and note the candidate chapters.</p>
+  <p class="guideline">2️⃣ <b>Read the Section and Chapter Notes BEFORE classifying</b>: they define terms and KICK OUT merchandise ("this chapter does not cover…"). This is where the exam trap lives.</p>
+  <p class="guideline">3️⃣ <b>GRI 1</b>: the heading text + the notes decide. If it resolves here, you are done — do not invent extra rules.</p>
+  <p class="guideline">4️⃣ <b>Go down one level at a time</b>: pick the heading (4 digits) and only then compare sibling subheadings at the same level (GRI 6), down to 10 digits.</p>
+  <p class="guideline">5️⃣ <b>Close at the duty column</b>: General (NTR), Special (FTAs — confirm the program in the General Notes) and Column 2. Check whether Chapter 99 adds duty (e.g., Section 301 for China).</p>
+</div>
+<div class="card">
+  <h3>⚖️ Each GRI in one line</h3>
+  <p class="guideline"><b>GRI 1</b> — Heading text and notes rule. Resolves most cases.</p>
+  <p class="guideline"><b>GRI 2(a)</b> — Incomplete or unassembled with the essential character = classify as complete.</p>
+  <p class="guideline"><b>GRI 2(b)</b> — Mixtures of materials: a reference to a material includes its mixtures → decided by GRI 3.</p>
+  <p class="guideline"><b>GRI 3(a)</b> — The most specific description beats the generic one.</p>
+  <p class="guideline"><b>GRI 3(b)</b> — Mixtures, composites and retail SETS: classify by the component giving the essential character.</p>
+  <p class="guideline"><b>GRI 3(c)</b> — Still tied: the heading last in numerical order wins.</p>
+  <p class="guideline"><b>GRI 4</b> — No heading fits? Use the most akin (very rare in practice).</p>
+  <p class="guideline"><b>GRI 5</b> — Cases and packing go with the product (unless suitable for repetitive use on their own).</p>
+  <p class="guideline"><b>GRI 6</b> — Everything above applies again at subheading level, comparing only siblings at the same level.</p>
+  <p class="guideline"><b>Additional U.S. Rules</b> — U.S. rules for "parts", "parts and accessories" and principal use.</p>
+</div>
+<div class="card" style="border-left:4px solid var(--stamp)">
+  <h3>⚠️ Classic exam traps</h3>
+  <p class="guideline">• The chapter note <b>excludes</b> the merchandise → the "obvious" chapter is wrong. Read the notes first.</p>
+  <p class="guideline">• Set put up for retail sale → GRI 3(b), essential character — do not classify item by item.</p>
+  <p class="guideline">• Unassembled product in the container → GRI 2(a), classify as the complete product.</p>
+  <p class="guideline">• A heading naming the merchandise (eo nomine) beats "other" — specific beats general.</p>
+  <p class="guideline">• A Special rate requires confirming the program in the General Notes — do not trust the symbol in parentheses alone.</p>
+  <p class="guideline">• Quick code reading: 2 digits = chapter · 4 = heading · 6 = worldwide (HS) · 8 and 10 = U.S. only.</p>
+</div>`,
+es:`
+<div class="card">
+  <span class="eyebrow">Método antes que memoria · examen a libro abierto</span>
+  <h2>📖 Guía HTSUS — cómo encontrar la clasificación sin perderse</h2>
+  <p class="lead">El HTSUS tiene miles de páginas, pero la consulta correcta toma minutos. El secreto es seguir siempre el mismo camino — el mismo en cada pregunta de clasificación.</p>
+</div>
+<div class="card">
+  <h3>🗺️ El mapa del libro</h3>
+  <p class="guideline">El HTSUS es un embudo: <b>22 Secciones → 99 Capítulos → partida (4 dígitos) → subpartida (6 dígitos) → línea estadounidense (8 y 10 dígitos)</b>.</p>
+  <p class="guideline">Regla práctica del orden: la materia prima va al principio, el producto terminado al final (animales vivos en el Cap. 1, maquinaria en el 84, obras de arte en el 97).</p>
+  <p class="guideline">Piezas de apoyo: <b>General Notes</b> (TLCs, USMCA y programas especiales), <b>Notas de Sección y de Capítulo</b> (definiciones y EXCLUSIONES), <b>Capítulo 98</b> (regímenes especiales de EE.UU.: 9801 retorno de mercancía americana, 9802 reparación/ensamble) y <b>Capítulo 99</b> (medidas temporales: Sección 301, salvaguardias).</p>
+</div>
+<div class="card" style="border-left:4px solid var(--gold)">
+  <h3>🧭 El método en 5 pasos</h3>
+  <p class="guideline">1️⃣ <b>Índice alfabético</b>: busca la mercancía por su nombre y anota los capítulos candidatos.</p>
+  <p class="guideline">2️⃣ <b>Lee las Notas de Sección y de Capítulo ANTES de clasificar</b>: definen términos y EXPULSAN mercancías ("this chapter does not cover…"). Aquí vive la trampa del examen.</p>
+  <p class="guideline">3️⃣ <b>GRI 1</b>: el texto de la partida + las notas deciden. Si se resuelve aquí, terminaste — no inventes reglas extra.</p>
+  <p class="guideline">4️⃣ <b>Baja un nivel a la vez</b>: elige la partida (4 díg.) y solo entonces compara las subpartidas hermanas del mismo nivel (GRI 6), hasta los 10 dígitos.</p>
+  <p class="guideline">5️⃣ <b>Cierra en la columna de duty</b>: General (NTR), Special (TLCs — confirma el programa en las General Notes) y Column 2. Revisa si el Cap. 99 agrega arancel (p. ej., Sección 301 para China).</p>
+</div>
+<div class="card">
+  <h3>⚖️ Las GRIs en una línea cada una</h3>
+  <p class="guideline"><b>GRI 1</b> — El texto de la partida y las notas mandan. Resuelve la mayoría de los casos.</p>
+  <p class="guideline"><b>GRI 2(a)</b> — Incompleto o desarmado con el carácter esencial = se clasifica como completo.</p>
+  <p class="guideline"><b>GRI 2(b)</b> — Mezclas de materiales: la referencia a un material incluye sus mezclas → decide la GRI 3.</p>
+  <p class="guideline"><b>GRI 3(a)</b> — La descripción más específica vence a la genérica.</p>
+  <p class="guideline"><b>GRI 3(b)</b> — Mezclas, compuestos y SETS de venta al por menor: clasifica por el componente que da el carácter esencial.</p>
+  <p class="guideline"><b>GRI 3(c)</b> — ¿Sigue el empate? Gana la última partida en orden numérico.</p>
+  <p class="guideline"><b>GRI 4</b> — ¿Ninguna partida encaja? Usa la más parecida (rarísimo en la práctica).</p>
+  <p class="guideline"><b>GRI 5</b> — Estuches y envases acompañan al producto (salvo que sean reutilizables por sí mismos).</p>
+  <p class="guideline"><b>GRI 6</b> — Todo lo anterior aplica de nuevo a nivel de subpartida, comparando solo hermanas del mismo nivel.</p>
+  <p class="guideline"><b>Additional U.S. Rules</b> — Reglas de EE.UU. para "parts", "parts and accessories" y uso principal (principal use).</p>
+</div>
+<div class="card" style="border-left:4px solid var(--stamp)">
+  <h3>⚠️ Trampas clásicas del examen</h3>
+  <p class="guideline">• La nota del capítulo <b>excluye</b> la mercancía → el capítulo "obvio" está mal. Lee las notas primero.</p>
+  <p class="guideline">• Set para venta al por menor → GRI 3(b), carácter esencial — no clasifiques artículo por artículo.</p>
+  <p class="guideline">• Producto desarmado en el contenedor → GRI 2(a), se clasifica como el producto completo.</p>
+  <p class="guideline">• La partida que nombra la mercancía (eo nomine) vence a "other" — lo específico vence a lo genérico.</p>
+  <p class="guideline">• La tasa Special exige confirmar el programa en las General Notes — no confíes solo en la sigla entre paréntesis.</p>
+  <p class="guideline">• Lectura rápida del código: 2 dígitos = capítulo · 4 = partida · 6 = mundial (HS) · 8 y 10 = solo EE.UU.</p>
+</div>`
+};
+function renderHtsus(){app().innerHTML=HTSUS_GUIDE[lang]||HTSUS_GUIDE.pt;}
 
 // ---------- TREINO DE NAVEGAÇÃO (fonte contra o relógio) ----------
 let navd={active:false,list:[],idx:0,score:0,times:[],start:0,picked:null,timerId:null};
@@ -1916,6 +2057,7 @@ function render(){
   else if(view==="exam")renderExam();
   else if(view==="civics")renderCivics();
   else if(view==="reading")renderReading();
+  else if(view==="htsus")renderHtsus();
   else renderStats();
 }
 renderLangs();

@@ -1212,10 +1212,10 @@ function renderLangs(){$("langs").innerHTML=["pt","en","es"].map(l=>`<button cla
 
 // ---------- estado (em memória, zera ao recarregar) ----------
 let view="home";
-let practice={list:[],idx:0,answered:null,pick:null,chat:[],loading:false,hintLvl:0,showTr:false};
+let practice={list:[],idx:0,answered:null,pick:null,chat:[],loading:false,hintLvl:0,trLang:null};
 let stats=stGet("stats")||{}; Object.keys(CATS).forEach(c=>{if(!stats[c])stats[c]={correct:0,total:0};});
 let examHist=stGet("examhist")||[];
-let exam={active:false,qs:[],answers:{},idx:0,end:0,timerId:null,done:false,score:null,hintLvl:0,showTr:false};
+let exam={active:false,qs:[],answers:{},idx:0,end:0,timerId:null,done:false,score:null,hintLvl:0,trLang:null};
 
 const $=id=>document.getElementById(id);
 const app=()=>$("app");
@@ -1280,7 +1280,7 @@ function renderHome(){
   </div>
   <div class="card">
     <p class="note">${t("homeNote")}</p>
-    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v21</p>
+    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v22</p>
   </div>`;
 }
 
@@ -1290,8 +1290,9 @@ function startPractice(cat){
   practice.list = cat==="all" ? p.slice() : p.filter(q=>q.cat===cat);
   practice.idx=0; resetQ(); renderPractice();
 }
-function resetQ(){practice.answered=null;practice.pick=null;practice.chat=[];practice.loading=false;practice.hintLvl=0;practice.showTr=false;}
-function cbleTr(q){if(lang==="en")return null;const e=(typeof CBLE_TR!=="undefined"&&CBLE_TR[q.exam])?CBLE_TR[q.exam][q.n]:null;return e||null;}
+function resetQ(){practice.answered=null;practice.pick=null;practice.chat=[];practice.loading=false;practice.hintLvl=0;practice.trLang=null;}
+function cbleTr(q){const e=(typeof CBLE_TR!=="undefined"&&CBLE_TR[q.exam])?CBLE_TR[q.exam][q.n]:null;return e||null;}
+function trPick(e,key,L){return e[key][L==="pt"?0:1];}
 const trIdx=()=>lang==="pt"?0:1;
 
 // ---------- DICA "ONDE BUSCAR" (gerada da citação oficial) ----------
@@ -1384,10 +1385,10 @@ function renderPractice(){
   <div class="card">
     <span class="badge">${examLabel(q.exam)} · Q${q.n} · ${catName(q.cat)}</span>
     ${q.scenario?`<div class="scenario"><div class="scnlabel">${t("scnLabel")}</div>${esc(q.scenario)} <button class="spk" onclick="speakPracticeScenario()" title="🔊 PT">🔊</button></div>`:""}
-    <div class="qtext">${esc(practice.showTr&&cbleTr(q)?cbleTr(q).q[trIdx()]:q.q)}</div>
+    <div class="qtext">${esc(practice.trLang&&cbleTr(q)?trPick(cbleTr(q),"q",practice.trLang):q.q)}</div>
     <div class="rowbtns" style="margin:8px 0 2px">
       <button class="ghost" onclick="speakPracticeQ()">${t("listenQ")}</button>
-      ${cbleTr(q)?`<button class="ghost" onclick="practice.showTr=!practice.showTr;renderPractice()">${practice.showTr?t("trHide"):t("trShow")}</button>`:""}
+      ${cbleTr(q)?`<button class="ghost" style="${practice.trLang==='pt'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="practice.trLang=practice.trLang==='pt'?null:'pt';renderPractice()">🌐 PT</button><button class="ghost" style="${practice.trLang==='es'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="practice.trLang=practice.trLang==='es'?null:'es';renderPractice()">🌐 ES</button>`:""}
       <button class="ghost" onclick="practice.hintLvl=practice.hintLvl?0:1;renderPractice()">${practice.hintLvl?t("hintHide"):t("hintShow")}</button>
       ${practice.hintLvl>0&&practice.hintLvl<3?`<button class="ghost" onclick="practice.hintLvl++;renderPractice()">🔎 ${t("hintDeeper")}</button>`:""}
     </div>
@@ -1400,7 +1401,7 @@ function renderPractice(){
           else if(L===practice.pick)cls+=" wrong";
           else cls+=" dim";
         }
-        return `<button class="${cls}" ${done?"disabled":""} onclick="answerPractice('${L}')"><span class="letter">${L})</span><span>${esc(practice.showTr&&cbleTr(q)?cbleTr(q)[L][trIdx()]:q.opts[L])}</span></button>`;
+        return `<button class="${cls}" ${done?"disabled":""} onclick="answerPractice('${L}')"><span class="letter">${L})</span><span>${esc(practice.trLang&&cbleTr(q)?trPick(cbleTr(q),L,practice.trLang):q.opts[L])}</span></button>`;
       }).join("")}
     </div>
     ${done?renderFeedback(q):""}
@@ -1504,10 +1505,10 @@ function renderExam(){
   <div class="card">
     <span class="badge">${examLabel(q.exam)} · Q${q.n} · ${catName(q.cat)}</span>
     ${q.scenario?`<div class="scenario"><div class="scnlabel">${t("scnLabel")}</div>${esc(q.scenario)} <button class="spk" onclick="speakExamScenario()" title="🔊 PT">🔊</button></div>`:""}
-    <div class="qtext">${esc(exam.showTr&&cbleTr(q)?cbleTr(q).q[trIdx()]:q.q)}</div>
+    <div class="qtext">${esc(exam.trLang&&cbleTr(q)?trPick(cbleTr(q),"q",exam.trLang):q.q)}</div>
     <div class="rowbtns" style="margin:8px 0 2px">
       <button class="ghost" onclick="speakExamQ()">${t("listenQ")}</button>
-      ${cbleTr(q)?`<button class="ghost" onclick="exam.showTr=!exam.showTr;renderExam()">${exam.showTr?t("trHide"):t("trShow")}</button>`:""}
+      ${cbleTr(q)?`<button class="ghost" style="${exam.trLang==='pt'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="exam.trLang=exam.trLang==='pt'?null:'pt';renderExam()">🌐 PT</button><button class="ghost" style="${exam.trLang==='es'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="exam.trLang=exam.trLang==='es'?null:'es';renderExam()">🌐 ES</button>`:""}
       <button class="ghost" onclick="exam.hintLvl=exam.hintLvl?0:1;renderExam()">${exam.hintLvl?t("hintHide"):t("hintShow")}</button>
       ${exam.hintLvl>0&&exam.hintLvl<3?`<button class="ghost" onclick="exam.hintLvl++;renderExam()">🔎 ${t("hintDeeper")}</button>`:""}
     </div>
@@ -1515,18 +1516,18 @@ function renderExam(){
     <div class="opts">
       ${["A","B","C","D"].map(L=>{
         const s=exam.answers[uid(q)]===L;
-        return `<button class="opt" style="${s?'border-color:var(--navy);background:#EEF3F9;font-weight:600':''}" onclick="pickExam('${uid(q)}','${L}')"><span class="letter">${L})</span><span>${esc(exam.showTr&&cbleTr(q)?cbleTr(q)[L][trIdx()]:q.opts[L])}</span></button>`;
+        return `<button class="opt" style="${s?'border-color:var(--navy);background:#EEF3F9;font-weight:600':''}" onclick="pickExam('${uid(q)}','${L}')"><span class="letter">${L})</span><span>${esc(exam.trLang&&cbleTr(q)?trPick(cbleTr(q),L,exam.trLang):q.opts[L])}</span></button>`;
       }).join("")}
     </div>
     <div class="rowbtns">
-      <button class="ghost" ${exam.idx===0?"disabled":""} onclick="exam.idx--;exam.hintLvl=0;exam.showTr=false;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)">${t("prev")}</button>
-      <button class="primary" ${exam.idx>=exam.qs.length-1?"disabled":""} onclick="exam.idx++;exam.hintLvl=0;exam.showTr=false;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)">${t("next")}</button>
+      <button class="ghost" ${exam.idx===0?"disabled":""} onclick="exam.idx--;exam.hintLvl=0;exam.trLang=null;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)">${t("prev")}</button>
+      <button class="primary" ${exam.idx>=exam.qs.length-1?"disabled":""} onclick="exam.idx++;exam.hintLvl=0;exam.trLang=null;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)">${t("next")}</button>
     </div>
   </div>
   <div class="card">
     <h3>${t("sheet")}</h3>
     <div class="sheet">
-      ${exam.qs.map((qq,i)=>`<button class="${exam.answers[uid(qq)]?'done':''} ${i===exam.idx?'cur':''}" onclick="exam.idx=${i};exam.hintLvl=0;exam.showTr=false;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)" title="${examLabel(qq.exam)} Q${qq.n}">${i+1}</button>`).join("")}
+      ${exam.qs.map((qq,i)=>`<button class="${exam.answers[uid(qq)]?'done':''} ${i===exam.idx?'cur':''}" onclick="exam.idx=${i};exam.hintLvl=0;exam.trLang=null;try{ttsStop()}catch(e){};renderExam();window.scrollTo(0,0)" title="${examLabel(qq.exam)} Q${qq.n}">${i+1}</button>`).join("")}
     </div>
   </div>`;
   tickClock();

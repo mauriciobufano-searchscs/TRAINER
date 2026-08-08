@@ -1207,7 +1207,7 @@ htsusTileSub:{pt:"Como achar a classificação no livro sem se perder: o método
 voiceTip:{pt:"⚠️ Este aparelho não tem voz em português e/ou espanhol instalada — nesses idiomas o áudio pode sair mudo ou com sotaque inglês. iPhone: Ajustes → Acessibilidade → Conteúdo Falado → Vozes → adicionar o idioma. Android: Configurações → Sistema → Conversão de texto em voz → instalar idiomas.",en:"⚠️ This device does not have Portuguese and/or Spanish voices installed — audio in those languages may be silent or spoken with an English accent. iPhone: Settings → Accessibility → Spoken Content → Voices → add the language. Android: Settings → System → Text-to-speech → install languages.",es:"⚠️ Este dispositivo no tiene voces en portugués y/o español instaladas — el audio en esos idiomas puede salir mudo o con acento inglés. iPhone: Ajustes → Accesibilidad → Contenido hablado → Voces → agregar el idioma. Android: Ajustes → Sistema → Texto a voz → instalar idiomas."}
 };
 const t=k=>(T[k]&&(T[k][lang]||T[k].pt))||k;
-function setLang(l){lang=l;stSet("lang",l);renderLangs();render();}
+function setLang(l){lang=l;stSet("lang",l);practice.trLang=null;exam.trLang=null;renderLangs();render();}
 function renderLangs(){$("langs").innerHTML=["pt","en","es"].map(l=>`<button class="${lang===l?'active':''}" onclick="setLang('${l}')">${l.toUpperCase()}</button>`).join("");}
 
 // ---------- estado (em memória, zera ao recarregar) ----------
@@ -1280,7 +1280,7 @@ function renderHome(){
   </div>
   <div class="card">
     <p class="note">${t("homeNote")}</p>
-    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v22</p>
+    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v23</p>
   </div>`;
 }
 
@@ -1388,7 +1388,7 @@ function renderPractice(){
     <div class="qtext">${esc(practice.trLang&&cbleTr(q)?trPick(cbleTr(q),"q",practice.trLang):q.q)}</div>
     <div class="rowbtns" style="margin:8px 0 2px">
       <button class="ghost" onclick="speakPracticeQ()">${t("listenQ")}</button>
-      ${cbleTr(q)?`<button class="ghost" style="${practice.trLang==='pt'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="practice.trLang=practice.trLang==='pt'?null:'pt';renderPractice()">🌐 PT</button><button class="ghost" style="${practice.trLang==='es'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="practice.trLang=practice.trLang==='es'?null:'es';renderPractice()">🌐 ES</button>`:""}
+      ${cbleTr(q)?`<button class="ghost" style="${!practice.trLang?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="practice.trLang=null;renderPractice()">🌐 EN</button><button class="ghost" style="${practice.trLang==='pt'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="practice.trLang='pt';renderPractice()">🌐 PT</button><button class="ghost" style="${practice.trLang==='es'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="practice.trLang='es';renderPractice()">🌐 ES</button>`:""}
       <button class="ghost" onclick="practice.hintLvl=practice.hintLvl?0:1;renderPractice()">${practice.hintLvl?t("hintHide"):t("hintShow")}</button>
       ${practice.hintLvl>0&&practice.hintLvl<3?`<button class="ghost" onclick="practice.hintLvl++;renderPractice()">🔎 ${t("hintDeeper")}</button>`:""}
     </div>
@@ -1508,7 +1508,7 @@ function renderExam(){
     <div class="qtext">${esc(exam.trLang&&cbleTr(q)?trPick(cbleTr(q),"q",exam.trLang):q.q)}</div>
     <div class="rowbtns" style="margin:8px 0 2px">
       <button class="ghost" onclick="speakExamQ()">${t("listenQ")}</button>
-      ${cbleTr(q)?`<button class="ghost" style="${exam.trLang==='pt'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="exam.trLang=exam.trLang==='pt'?null:'pt';renderExam()">🌐 PT</button><button class="ghost" style="${exam.trLang==='es'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="exam.trLang=exam.trLang==='es'?null:'es';renderExam()">🌐 ES</button>`:""}
+      ${cbleTr(q)?`<button class="ghost" style="${!exam.trLang?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="exam.trLang=null;renderExam()">🌐 EN</button><button class="ghost" style="${exam.trLang==='pt'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="exam.trLang='pt';renderExam()">🌐 PT</button><button class="ghost" style="${exam.trLang==='es'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="exam.trLang='es';renderExam()">🌐 ES</button>`:""}
       <button class="ghost" onclick="exam.hintLvl=exam.hintLvl?0:1;renderExam()">${exam.hintLvl?t("hintHide"):t("hintShow")}</button>
       ${exam.hintLvl>0&&exam.hintLvl<3?`<button class="ghost" onclick="exam.hintLvl++;renderExam()">🔎 ${t("hintDeeper")}</button>`:""}
     </div>

@@ -1184,7 +1184,7 @@ guideMotto:{pt:"Resumo: Praticar ensina · Simulado mede · Civics é a cidadani
 tutorOffline:{pt:"📚 Fonte oficial desta questão: {CITE}\n\nA prova é de livro aberto — abra a fonte acima, a resposta mora ali. Treinar esse caminho é exatamente o que a prova cobra.\n\n🤖 O Tutor IA com explicações personalizadas chega em breve, na versão com login.",en:"📚 Official source for this question: {CITE}\n\nThe exam is open book — open the source above, the answer lives there. Training that path is exactly what the exam demands.\n\n🤖 The AI Tutor with personalized explanations is coming soon, in the login version.",es:"📚 Fuente oficial de esta pregunta: {CITE}\n\nEl examen es a libro abierto — abre la fuente de arriba, la respuesta vive ahí. Entrenar ese camino es exactamente lo que exige el examen.\n\n🤖 El Tutor IA con explicaciones personalizadas llega pronto, en la versión con login."},
 civTutorOffline:{pt:"📚 As respostas oficiais estão logo acima — memorize uma delas e treine dizê-la em voz alta em inglês (use o 🔊).\n\n🤖 O Tutor IA com dicas de memorização chega em breve, na versão com login.",en:"📚 The official answers are right above — memorize one of them and practice saying it out loud in English (use the 🔊).\n\n🤖 The AI Tutor with memory tips is coming soon, in the login version.",es:"📚 Las respuestas oficiales están justo arriba — memoriza una y practica decirla en voz alta en inglés (usa el 🔊).\n\n🤖 El Tutor IA con consejos de memorización llega pronto, en la versión con login."},
 civTest:{pt:"Teste — todas as 128",en:"Test — all 128",es:"Examen — las 128"},
-civTestSub:{pt:"Percorre as 128 perguntas oficiais em ordem aleatória, com 4 alternativas. Seu avanço fica salvo — pare e continue quando quiser. As que você erra voltam com mais frequência até grudarem.",en:"Goes through all 128 official questions in random order, with 4 choices. Your progress is saved — stop and resume anytime. The ones you miss come back more often until they stick.",es:"Recorre las 128 preguntas oficiales en orden aleatorio, con 4 opciones. Tu avance queda guardado — para y continúa cuando quieras. Las que fallas vuelven con más frecuencia hasta que se peguen."},
+civTestSub:{pt:"O teste percorre as 128 perguntas oficiais com 3 alternativas. Acertou, a pergunta vai para o fim da fila; errou, ela volta logo — e continua voltando até você acertar. Tudo fica salvo: pare e continue quando quiser.",en:"The test goes through all 128 official questions with 3 choices. Get it right and the question goes to the back of the line; miss it and it comes back soon — and keeps coming back until you get it right. Everything is saved: stop and resume anytime.",es:"El examen recorre las 128 preguntas oficiales con 3 opciones. Si aciertas, la pregunta va al final de la fila; si fallas, vuelve pronto — y sigue volviendo hasta que aciertes. Todo queda guardado: para y continúa cuando quieras."},
 civTestResume:{pt:"Continuar teste",en:"Resume test",es:"Continuar examen"},
 civTestReset:{pt:"↺ Zerar",en:"↺ Reset",es:"↺ Reiniciar"},
 civTestResetC:{pt:"Zerar o teste e começar uma rodada nova? Seu histórico de erros continua valendo para a frequência.",en:"Reset the test and start a new round? Your error history still counts for frequency.",es:"¿Reiniciar el examen y empezar una ronda nueva? Tu historial de errores sigue contando para la frecuencia."},
@@ -1280,7 +1280,7 @@ function renderHome(){
   </div>
   <div class="card">
     <p class="note">${t("homeNote")}</p>
-    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v23</p>
+    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v24</p>
   </div>`;
 }
 
@@ -1665,12 +1665,12 @@ function civGrade(g){ // 0=errei 1=difícil 2=bom 3=fácil
   stSet("civdeck",civ.deck);
   renderCivics();window.scrollTo(0,0);
 }
-function civTestOpts(c){ // 1 oficial + 3 distratores (mesma categoria primeiro), sem repetir
+function civTestOpts(c){ // 1 oficial + 2 distratoras (mesma categoria primeiro), sem repetir
   const correct=c.a[Math.floor(Math.random()*c.a.length)];
   const others=shuffle(CIVICS.filter(x=>x.n!==c.n&&x.c===c.c).flatMap(x=>x.a)
     .concat(shuffle(CIVICS.filter(x=>x.n!==c.n&&x.c!==c.c).flatMap(x=>x.a))));
   const seen=new Set([correct.toLowerCase()]);const dis=[];
-  for(const o of others){const k=o.toLowerCase();if(!seen.has(k)){seen.add(k);dis.push(o);if(dis.length===3)break;}}
+  for(const o of others){const k=o.toLowerCase();if(!seen.has(k)){seen.add(k);dis.push(o);if(dis.length===2)break;}}
   const opts=shuffle([correct].concat(dis));
   return {opts,correctIdx:opts.indexOf(correct)};
 }
@@ -1731,8 +1731,8 @@ function renderCivics(){
       <b>${ready}%</b> ${t("civReady")}</div>
       <p class="note">${t("civCounts").replace("{D}",due).replace("{N}",fresh).replace("{M}",mast)}</p>
       <div class="rowbtns">
-        <button class="primary" onclick="civStartSession('all')">▶ ${t("civStudy")}</button>
         <button class="primary" style="background:var(--stamp)" onclick="civStartTest()">📝 ${tOn?t("civTestResume")+" ("+tsav.pos+"/"+tsav.queue.length+")":t("civTest")}</button>
+        <button class="ghost" onclick="civStartSession('all')">🃏 ${t("civStudy")}</button>
         <button class="ghost" onclick="civStartSession('star')">⭐ ${t("civStar")}</button>
       </div>
       <p class="note">${t("civTestSub")}</p>

@@ -1280,7 +1280,7 @@ function renderHome(){
   </div>
   <div class="card">
     <p class="note">${t("homeNote")}</p>
-    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v24</p>
+    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v25</p>
   </div>`;
 }
 
@@ -1986,8 +1986,23 @@ function speakExamQ(){const q=exam.qs[exam.idx];if(!q)return;ttsToggleRead([q.q,
 function speakPracticeScenario(){const q=practice.list[practice.idx];if(q&&q.scenario)ttsToggleRead([q.scenario],"pt");}
 function speakExamScenario(){const q=exam.qs[exam.idx];if(q&&q.scenario)ttsToggleRead([q.scenario],"pt");}
 function civSpeak(text){ttsStop();ttsSpeak(text,"en");}
-function civSpeakQ(n){const c=CIVICS.find(x=>x.n===n);if(c)civSpeak(c.q);}
-function civSpeakA(n){const c=CIVICS.find(x=>x.n===n);if(c)civSpeak(c.a.slice(0,4).join(". "));}
+function civSpeakQ(n){ // fala a pergunta em inglês e depois no idioma do app
+  const c=CIVICS.find(x=>x.n===n);if(!c)return;
+  ttsStop();
+  const tr=CIVICS_TR[n];
+  if(lang==="pt"&&tr)ttsSpeak(c.q,"en",()=>ttsSpeak(tr.q[0],"pt"));
+  else if(lang==="es"&&tr)ttsSpeak(c.q,"en",()=>ttsSpeak(tr.q[1],"es"));
+  else ttsSpeak(c.q,"en");
+}
+function civSpeakA(n){ // fala as respostas oficiais em inglês e depois no idioma do app
+  const c=CIVICS.find(x=>x.n===n);if(!c)return;
+  ttsStop();
+  const en=c.a.slice(0,4).join(". ");
+  const tr=CIVICS_TR[n];
+  const trA=tr&&tr.a?(lang==="pt"?tr.a[0]:lang==="es"?tr.a[1]:null):null;
+  if(trA)ttsSpeak(en,"en",()=>ttsSpeak(trA.slice(0,4).join(". "),lang));
+  else ttsSpeak(en,"en");
+}
 function renderReading(){
   if(!ttsSupported()){
     app().innerHTML=`<div class="card"><h2>${t("readTitle")}</h2><p class="lead">${t("readUnsupported")}</p></div>`;return;

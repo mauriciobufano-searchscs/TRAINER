@@ -136,6 +136,12 @@ table.stats th{background:var(--navy);color:#fff;font-family:'Barlow Condensed',
 .result-big{font-family:'Barlow Condensed',sans-serif;font-size:52px;color:var(--navy)}
 .pass{color:var(--ok)}.fail{color:var(--stamp)}
 @media(prefers-reduced-motion:reduce){.spin{animation:none}.tile{transition:none}}
+/* v43: barra fixa de navegação após responder */
+.quicknav{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:10px;align-items:center;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);
+  border-top:2px solid var(--navy);box-shadow:0 -3px 12px rgba(0,0,0,.10)}
+.quicknav .primary{flex:1;font-size:16px;padding:12px}
+.quicknav .qn-count{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--navy);white-space:nowrap}
 /* v42: contraste pós-resposta — dá pra reler o que errou */
 .opts .opt:disabled{opacity:1 !important;cursor:default;}
 .opts .opt:disabled span{color:#16324F;}
@@ -1286,7 +1292,7 @@ function renderHub(){
   </div>
   <div class="card">
     <p class="note">${t("homeNote")}</p>
-    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v42</p>
+    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v44</p>
   </div>`;
 }
 
@@ -1460,7 +1466,12 @@ function renderPractice(){
   <div class="rowbtns">
     <button class="ghost" ${practice.idx===0?"disabled":""} onclick="movePractice(-1)">${t("prev")}</button>
     <button class="primary" ${practice.idx>=practice.list.length-1?"disabled":""} onclick="movePractice(1)">${t("next")}</button>
-  </div>`;
+  </div>
+  ${done?`<div style="height:72px"></div><div class="quicknav">
+    <button class="ghost" ${practice.idx===0?"disabled":""} onclick="movePractice(-1)">←</button>
+    <span class="qn-count">${practice.idx+1}/${practice.list.length}</span>
+    <button class="primary" ${practice.idx>=practice.list.length-1?"disabled":""} onclick="movePractice(1)">${t("next")}</button>
+  </div>`:""}`;
 }
 function answerPractice(L){
   try{ttsStop()}catch(e){};
@@ -2040,16 +2051,34 @@ function ttsToggleRead(parts,lc){
   if(speechSynthesis.speaking){ttsStop();return;}
   parts.filter(Boolean).forEach(p=>ttsSpeak(p,lc));
 }
-function speakPracticeQ(){const q=practice.list[practice.idx];if(!q)return;ttsToggleRead([q.q,"Option A: "+q.opts.A,"Option B: "+q.opts.B,"Option C: "+q.opts.C,"Option D: "+q.opts.D],"en");}
-function speakCorrect(){ // fala a(s) correta(s) em inglês e depois no idioma do app (se houver tradução)
+function optWord(L){return L==="pt"?"Alternativa":L==="es"?"Opción":"Option";}
+function speakPracticeQ(){ // narra no idioma que está na tela (chip 🌐 ativo)
+  const q=practice.list[practice.idx];if(!q)return;
+  const tr=cbleTr(q),L=practice.trLang;
+  if(L&&tr){
+    const w=optWord(L);
+    ttsToggleRead([trPick(tr,"q",L),w+" A: "+trPick(tr,"A",L),w+" B: "+trPick(tr,"B",L),w+" C: "+trPick(tr,"C",L),w+" D: "+trPick(tr,"D",L)],L);
+  } else ttsToggleRead([q.q,"Option A: "+q.opts.A,"Option B: "+q.opts.B,"Option C: "+q.opts.C,"Option D: "+q.opts.D],"en");
+}
+function speakCorrect(){ // fala a(s) correta(s): no idioma do chip ativo (ou do app) + inglês original
   const q=practice.list[practice.idx];if(!q)return;ttsStop();
   const en=q.ans.map(L=>"Correct answer, option "+L+": "+q.opts[L]).join(". ");
   const tr=cbleTr(q);
-  if(tr&&(lang==="pt"||lang==="es")){
-    ttsSpeak(en,"en",()=>{q.ans.forEach(L=>ttsSpeak(trPick(tr,L,lang),lang));});
+  const L2=practice.trLang||((lang==="pt"||lang==="es")?lang:null);
+  if(tr&&L2){
+    const w=optWord(L2);
+    const trd=q.ans.map(L=>w+" "+L+": "+trPick(tr,L,L2)).join(". ");
+    ttsSpeak(trd,L2,()=>ttsSpeak(en,"en"));
   } else ttsSpeak(en,"en");
 }
-function speakExamQ(){const q=exam.qs[exam.idx];if(!q)return;ttsToggleRead([q.q,"Option A: "+q.opts.A,"Option B: "+q.opts.B,"Option C: "+q.opts.C,"Option D: "+q.opts.D],"en");}
+function speakExamQ(){ // narra no idioma que está na tela (chip 🌐 ativo)
+  const q=exam.qs[exam.idx];if(!q)return;
+  const tr=cbleTr(q),L=exam.trLang;
+  if(L&&tr){
+    const w=optWord(L);
+    ttsToggleRead([trPick(tr,"q",L),w+" A: "+trPick(tr,"A",L),w+" B: "+trPick(tr,"B",L),w+" C: "+trPick(tr,"C",L),w+" D: "+trPick(tr,"D",L)],L);
+  } else ttsToggleRead([q.q,"Option A: "+q.opts.A,"Option B: "+q.opts.B,"Option C: "+q.opts.C,"Option D: "+q.opts.D],"en");
+}
 function speakPracticeScenario(){const q=practice.list[practice.idx];if(q&&q.scenario)ttsToggleRead([q.scenario],"pt");}
 function speakExamScenario(){const q=exam.qs[exam.idx];if(q&&q.scenario)ttsToggleRead([q.scenario],"pt");}
 function civSpeak(text){ttsStop();ttsSpeak(text,"en");}

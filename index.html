@@ -1292,7 +1292,7 @@ function renderHub(){
   </div>
   <div class="card">
     <p class="note">${t("homeNote")}</p>
-    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v44</p>
+    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v45</p>
   </div>`;
 }
 
@@ -1340,9 +1340,17 @@ function renderHome(){
 }
 
 // ---------- PRÁTICA ----------
+function qKey(q){return q.exam+"#"+q.n;}
 function startPractice(cat){
   const p=pool();
-  practice.list = cat==="all" ? p.slice() : p.filter(q=>q.cat===cat);
+  let base = cat==="all" ? p.slice() : p.filter(q=>q.cat===cat);
+  base = shuffle(base); // ordem sempre embaralhada
+  // histórico: questão com mais erro que acerto ganha uma aparição extra na sessão
+  const qs=stGet("cbleqstats")||{};
+  const extras=[];
+  base.forEach(q=>{const s=qs[qKey(q)];if(s&&s.w>s.r)extras.push(q);});
+  extras.forEach(q=>base.splice(Math.floor(Math.random()*(base.length+1)),0,q));
+  practice.list=base;
   practice.idx=0; resetQ(); renderPractice();
 }
 function resetQ(){practice.answered=null;practice.pick=null;practice.chat=[];practice.loading=false;practice.hintLvl=0;practice.trLang=null;}
@@ -1481,6 +1489,20 @@ function answerPractice(L){
   stats[q.cat].total++;
   if(practice.answered)stats[q.cat].correct++;
   stSet("stats",stats);
+  // histórico por questão (motor de flashcards)
+  const qs=stGet("cbleqstats")||{};const k=qKey(q);
+  if(!qs[k])qs[k]={w:0,r:0};
+  if(practice.answered){qs[k].r++;}
+  else{
+    qs[k].w++;
+    // errou: a questão volta daqui a 4-8 posições nesta sessão (máx. 2 reaparições futuras)
+    const future=practice.list.slice(practice.idx+1).filter(x=>qKey(x)===k).length;
+    if(future<2){
+      const at=Math.min(practice.list.length,practice.idx+4+Math.floor(Math.random()*5));
+      practice.list.splice(at,0,q);
+    }
+  }
+  stSet("cbleqstats",qs);
   renderPractice();
 }
 function movePractice(d){try{ttsStop()}catch(e){};practice.idx+=d;resetQ();renderPractice();window.scrollTo(0,0);}

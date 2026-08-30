@@ -1472,6 +1472,7 @@ readEyebrow:{pt:"Ouvir e repetir · vozes do dispositivo",en:"Listen and repeat 
 readTitle:{pt:"Módulo de Leitura",en:"Reading Module",es:"Módulo de Lectura"},
 readLead:{pt:"Aperte ▶: o app fala a frase em inglês e depois em português. Toque em qualquer linha para ouvir só aquela língua. Repita em voz alta depois do áudio — é assim que a pronúncia gruda.",en:"Press ▶: the app speaks the sentence in English. Tap the line to hear it again. Repeat out loud after the audio — that is how pronunciation sticks.",es:"Presiona ▶: la app dice la frase en inglés y después en español. Toca cualquier línea para escuchar solo ese idioma. Repite en voz alta después del audio — así se pega la pronunciación."},
 readSlow:{pt:"Modo lento",en:"Slow mode",es:"Modo lento"},
+spdTitle:{pt:"Velocidade da narração — toque para mudar",en:"Narration speed — tap to change",es:"Velocidad de la narración — toca para cambiar"},
 readStop:{pt:"Parar",en:"Stop",es:"Detener"},
 readNote:{pt:"Frases de treino no estilo do teste de leitura do USCIS (no teste oficial você lê UMA frase corretamente, em inglês). As vozes vêm do seu celular/computador — a qualidade varia por aparelho.",en:"Practice sentences in the style of the USCIS reading test (in the official test you read ONE sentence correctly, in English). Voices come from your phone/computer — quality varies by device.",es:"Frases de práctica al estilo del examen de lectura del USCIS (en el examen oficial lees UNA frase correctamente, en inglés). Las voces vienen de tu teléfono/computadora — la calidad varía según el dispositivo."},
 readUnsupported:{pt:"Seu navegador não suporta síntese de voz. Tente no Chrome, Safari ou Edge.",en:"Your browser does not support speech synthesis. Try Chrome, Safari or Edge.",es:"Tu navegador no soporta síntesis de voz. Prueba en Chrome, Safari o Edge."},
@@ -1605,7 +1606,7 @@ function renderHub(){
   </div>
   <div class="card">
     <p class="note">${t("homeNote")}</p>
-    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v49</p>
+    <p class="note" style="text-align:right;opacity:.5;font-size:11px;margin-top:6px">Exam Navigator · v50</p>
   </div>`;
 }
 
@@ -1764,6 +1765,7 @@ function renderPractice(){
     <div class="qtext">${esc(practice.trLang&&cbleTr(q)?trPick(cbleTr(q),"q",practice.trLang):q.q)}</div>
     <div class="rowbtns" style="margin:8px 0 2px">
       <button class="ghost" onclick="speakPracticeQ()">${t("listenQ")}</button>
+      ${ttsRateBtn()}
       ${done?`<button class="ghost" style="border-color:var(--ok);color:var(--ok)" onclick="speakCorrect()">${t("hearCorrect")}</button>`:""}
       ${cbleTr(q)?`<button class="ghost" style="${!practice.trLang?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="practice.trLang=null;renderPractice()">🌐 EN</button><button class="ghost" style="${practice.trLang==='pt'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="practice.trLang='pt';renderPractice()">🌐 PT</button><button class="ghost" style="${practice.trLang==='es'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="practice.trLang='es';renderPractice()">🌐 ES</button>`:""}
       <button class="ghost" onclick="practice.hintLvl=practice.hintLvl?0:1;renderPractice()">${practice.hintLvl?t("hintHide"):t("hintShow")}</button>
@@ -1904,6 +1906,7 @@ function renderExam(){
     <div class="qtext">${esc(exam.trLang&&cbleTr(q)?trPick(cbleTr(q),"q",exam.trLang):q.q)}</div>
     <div class="rowbtns" style="margin:8px 0 2px">
       <button class="ghost" onclick="speakExamQ()">${t("listenQ")}</button>
+      ${ttsRateBtn()}
       ${cbleTr(q)?`<button class="ghost" style="${!exam.trLang?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="exam.trLang=null;renderExam()">🌐 EN</button><button class="ghost" style="${exam.trLang==='pt'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="exam.trLang='pt';renderExam()">🌐 PT</button><button class="ghost" style="${exam.trLang==='es'?'background:var(--navy);color:#fff;border-color:var(--navy)':''}" onclick="exam.trLang='es';renderExam()">🌐 ES</button>`:""}
       <button class="ghost" onclick="exam.hintLvl=exam.hintLvl?0:1;renderExam()">${exam.hintLvl?t("hintHide"):t("hintShow")}</button>
       ${exam.hintLvl>0&&exam.hintLvl<3?`<button class="ghost" onclick="exam.hintLvl++;renderExam()">🔎 ${t("hintDeeper")}</button>`:""}
@@ -2183,7 +2186,7 @@ function renderCivics(){
     </div>
     <div class="card">
       <span class="badge">${civCatName(c.c)} · Q${c.n}${c.s?" ⭐ 65/20":""}</span>
-      <div class="flashq">${esc(c.q)} <button class="spk" onclick="civSpeakQ(${c.n})" title="${t('civListen')}">🔊</button></div>
+      <div class="flashq">${esc(c.q)} <button class="spk" onclick="civSpeakQ(${c.n})" title="${t('civListen')}">🔊</button> ${ttsRateBtn("spk")}</div>
       ${civTrQ(c.n)?`<div class="flashtr">${esc(civTrQ(c.n))}</div>`:""}
       <p class="note" style="margin-top:10px">${t("civTestPick")}</p>
       <div class="opts">
@@ -2240,7 +2243,7 @@ function renderCivics(){
   </div>
   <div class="card flashcard" onclick="${civ.flipped?"":"civ.flipped=true;renderCivics()"}">
     <span class="badge">${civCatName(c.c)} · Q${c.n}${c.s?" ⭐ 65/20":""}</span>
-    <div class="flashq">${esc(c.q)} <button class="spk" onclick="event.stopPropagation();civSpeakQ(${c.n})" title="${t('civListen')}">🔊</button></div>
+    <div class="flashq">${esc(c.q)} <button class="spk" onclick="event.stopPropagation();civSpeakQ(${c.n})" title="${t('civListen')}">🔊</button> ${ttsRateBtn("spk")}</div>
     ${civTrQ(c.n)?`<div class="flashtr">${esc(civTrQ(c.n))}</div>`:""}
     ${civ.flipped?`
       <div class="flashdivider"></div>
@@ -2339,7 +2342,7 @@ const READING_CBLE=[
 {en:"The shipment arrived at the port of entry.",pt:"O embarque chegou ao porto de entrada.",es:"El embarque llegó al puerto de entrada."},
 {en:"CBP may demand redelivery of released merchandise.",pt:"O CBP pode exigir a redelivery (redevolução) de mercadoria já liberada.",es:"El CBP puede exigir la redelivery (redevolución) de mercancía ya liberada."}
 ];
-let tts={slow:false,playing:-1,voices:[],set:"civ"};
+let tts={slow:false,playing:-1,voices:[],set:"civ",rate:stGet("ttsrate")||1};
 function curReading(){return tts.set==="cble"?READING_CBLE:READING;}
 function ttsInit(){
   if(!("speechSynthesis" in window))return;
@@ -2369,7 +2372,7 @@ function ttsSpeak(text,lc,onend){
   const u=new SpeechSynthesisUtterance(text);
   const v=ttsVoice(lc);if(v)u.voice=v;
   u.lang=(v&&v.lang)||({en:"en-US",pt:"pt-BR",es:"es-US"}[lc]);
-  u.rate=tts.slow?0.7:0.95;
+  u.rate=tts.slow?0.7:tts.rate;
   if(onend)u.onend=onend;
   speechSynthesis.speak(u);
 }
@@ -2385,6 +2388,19 @@ function ttsToggleRead(parts,lc){
   if(!ttsSupported())return;
   if(speechSynthesis.speaking){ttsStop();return;}
   parts.filter(Boolean).forEach(p=>ttsSpeak(p,lc));
+}
+const TTS_RATES=[0.75,1,1.25,1.5,1.75,2];
+function ttsRateLabel(){return (tts.rate%1===0?String(tts.rate):tts.rate.toFixed(2).replace(/0$/,""))+"\u00d7";}
+function ttsRateCycle(){
+  const i=TTS_RATES.indexOf(tts.rate);
+  tts.rate=TTS_RATES[(i+1)%TTS_RATES.length];
+  stSet("ttsrate",tts.rate);
+  ttsStop();          // velocidade nova vale a partir da próxima fala
+  render();
+}
+function ttsRateBtn(cls){
+  if(!ttsSupported())return "";
+  return `<button class="${cls||"ghost"}" onclick="event.stopPropagation();ttsRateCycle()" title="${t("spdTitle")}">\u26a1 ${ttsRateLabel()}</button>`;
 }
 function optWord(L){return L==="pt"?"Alternativa":L==="es"?"Opción":"Option";}
 function speakPracticeQ(){ // narra no idioma que está na tela (chip 🌐 ativo)
@@ -2448,6 +2464,7 @@ function renderReading(){
     ${tts.set==='cble'?`<p class="note">${t("readCbleLead")}</p>`:""}
     <div class="rowbtns">
       <button class="${tts.slow?'primary':'ghost'}" onclick="tts.slow=!tts.slow;renderReading()">🐢 ${t("readSlow")}${tts.slow?" ✓":""}</button>
+      ${ttsRateBtn()}
       <button class="ghost" onclick="ttsStop()">⏹ ${t("readStop")}</button>
     </div>
     <p class="note">${t("readNote")}</p>
